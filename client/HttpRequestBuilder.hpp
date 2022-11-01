@@ -1,0 +1,14 @@
+//
+// Created by Admin on 2022-10-31.
+//
+
+#ifndef C_WRAPPERS_HTTPREQUESTBUILDER_HPP
+#define C_WRAPPERS_HTTPREQUESTBUILDER_HPP
+
+
+class HttpRequestBuilder {
+
+};
+
+
+#endif //C_WRAPPERS_HTTPREQUESTBUILDER_HPP
