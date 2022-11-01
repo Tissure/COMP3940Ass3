@@ -1,7 +1,6 @@
 #pragma once
 #include "Socket.h"
-class ServerSocket
-{
+class ServerSocket{
 public:
 	ServerSocket(int port);
 	Socket* Accept();
