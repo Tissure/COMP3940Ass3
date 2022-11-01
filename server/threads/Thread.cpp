@@ -1,14 +1,19 @@
 #include "Thread.h"
-#include "SimpleThread.h"
+#include "Router.hpp"
 #include <pthread.h>
 #include <stdlib.h>
+#include <iostream>
 #include <string.h>
 
-void* startMethodInThread(void *arg)
-{
-	if (arg == NULL)
-		return 0;
-	SimpleThread *thread = (SimpleThread*)arg;
+using namespace std;
+
+void* startMethodInThread(void *arg){
+    cout << "cum"<< endl;
+	if (arg == NULL) {
+        cout <<"no args" << endl;
+        return 0;
+    }
+	Router *thread = (Router*)arg;
 	thread->run();
 	return NULL;
 }
