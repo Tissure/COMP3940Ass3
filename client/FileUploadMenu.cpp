@@ -28,13 +28,11 @@ map <string, string> FileUploadMenu::getDataFromUser(){
 
     cout << endl << "Please enter a date yyyymmdd" << endl;
     string date;
-    clean_cin();
     getline(cin, date);
     data.insert(pair<string, string>("date", date));
 
     cout << endl << "Please enter a file path" << endl;
     string file_path;
-    clean_cin();
     getline(cin, file_path);
     data.insert(pair<string, string>("file_path", file_path));
 

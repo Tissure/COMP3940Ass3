@@ -17,8 +17,8 @@ public:
     static string buildMultipartRequest(string filePath, string caption, string date);
 private:
     static string buildBody(string filePath, string caption, string date);
-//    static void buildFile(string bodyBuilder, string filePath);
-//    static void buildContentType(string bodyBuilder, string filePath);
+    static string buildFile(string filePath);
+    static string buildContentType(string filePath);
 };
 
 
