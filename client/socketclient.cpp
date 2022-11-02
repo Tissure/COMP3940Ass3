@@ -6,15 +6,17 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+#include "FileUploadMenu.hpp"
+
+void uploadFile(int);
 
 int main() {
     int sock;
     struct sockaddr_in server;
-    int msgsock;
-    char buf[1024];
     struct hostent *hp;
     char *host = "127.0.0.1";
-    int rval;
+
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
     if (sock < 0) {
@@ -31,15 +33,36 @@ int main() {
         perror("connecting");
     }
 
-    strcpy(buf, "root");
+    uploadFile(sock);
+
+    close(sock);
+    return 0;
+}
+
+void uploadFile(int sock){
+    int rval;
+    char buf[1024];
+
+    bool userInput = 0;
+    FileUploadMenu menu;
+    do {
+        cout << "Upload File:" << endl;
+        menu.buildRequest(menu.getDataFromUser());
+        cout << "Would you like to upload another file? Y(1)/N(0)" << endl;
+    }while(userInput == 1);
+
+    //Send HTTP request
+    strcpy(buf, menu.getRequestString().c_str());
     if ((rval = write(sock, buf, 1024)) < 0) {
         perror("writing socket");
     }
 
+    // Get response
     printf("%s\n", "Waiting response");
     while ((rval = read(sock, buf, 1024)) > 0) {
         printf("Response %s\n", buf);
+//        menu.handleResponse(buf);
     }
-    close(sock);
-    return 0;
 }
+
+
