@@ -31,7 +31,13 @@ int main() {
         perror("connecting");
     }
 
-    strcpy(buf, "root");
+    strcpy(buf, "GET /somedir/page.html HTTP/1.1\n\r"
+                "HOST:www.sameschool.edu\n\r"
+                "Connection:close\n\r"
+                "User-agent:Mozzilla/4.0\n\r"
+                "Accept Language: fr\n\r\n\r"
+    );
+
     if ((rval = write(sock, buf, 1024)) < 0) {
         perror("writing socket");
     }
