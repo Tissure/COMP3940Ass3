@@ -3,3 +3,9 @@
 //
 
 #include "HttpServletResponse.hpp"
+
+char * HttpServletResponse::getResponse() {
+    //TODO
+    char * c = "tmp";
+    return c;
+}

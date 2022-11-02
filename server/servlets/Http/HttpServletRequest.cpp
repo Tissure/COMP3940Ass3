@@ -3,3 +3,8 @@
 //
 
 #include "HttpServletRequest.hpp"
+
+//Add more stuff idk
+HttpServletRequest::HttpServletRequest(char * request) {
+    rawRequest = request;
+}

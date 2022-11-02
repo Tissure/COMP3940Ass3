@@ -1,6 +1,7 @@
 //
 // Created by Admin on 2022-10-31.
 //
+#pragma once
 #ifndef C_WRAPPERS_HTTPSERVLETRESPONSE_HPP
 #define C_WRAPPERS_HTTPSERVLETRESPONSE_HPP
 
@@ -11,7 +12,8 @@ using namespace std;
 
 class HttpServletResponse {
 public:
-    HttpServletResponse(ostream&);
+    HttpServletResponse(){};
+    char * getResponse();
 };
 
 

@@ -6,13 +6,11 @@
 #include <string.h>
 #include <stdio.h>
 
-Socket::Socket(int sock)
-{
+Socket::Socket(int sock){
 	this->sock = sock;
 }
 
-char* Socket::getRequest()
-{
+char* Socket::getRequest(){
   int rval; // Return value
   char *buf = new char[1024];
 

@@ -1,7 +1,7 @@
 //
 // Created by Admin on 2022-10-31.
 //
-
+#pragma once
 #include "HttpServletRequest.hpp"
 #include "HttpServletResponse.hpp"
 
