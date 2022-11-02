@@ -5,9 +5,13 @@
 #ifndef C_WRAPPERS_HTTPSERVLETRESQUEST_HPP
 #define C_WRAPPERS_HTTPSERVLETRESQUEST_HPP
 
+#include <istream>
 
-class HttpServletResquest {
+using namespace std;
 
+class HttpServletRequest {
+public:
+    HttpServletRequest(istream&);
 };
 
 
