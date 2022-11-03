@@ -3,6 +3,8 @@
 //
 
 #include <string>
+#include <fstream>
+#include <iostream>
 #include "HttpRequestBuilder.hpp"
 
 using namespace std;
@@ -26,6 +28,7 @@ string HttpRequestBuilder::buildMultipartRequest(string filePath, string caption
             + bodyBuilder;
     // request line
 
+    cout << "END BUILDER: " << endl;
     return reqBuilder;
 }
 
@@ -33,19 +36,49 @@ string HttpRequestBuilder::buildBody(string filePath, string caption, string dat
     string body = "--" + HttpRequestBuilder::BOUNDARY + "\r\n";
 
     // parse the file
-    body += buildContentType(filePath);
+    body += buildFile(filePath);
 
     // parse the caption
     body = body + "Content-Disposition: form-data; name=\"caption\"" + "\r\n"
-            + "\r\n" + caption + "\r\n"
-            + "--" + HttpRequestBuilder::BOUNDARY + "\r\n";
+           + "\r\n" + caption + "\r\n"
+           + "--" + HttpRequestBuilder::BOUNDARY + "\r\n";
 
     // parse the date
     body = body + "Content-Disposition: form-data; name=\"date\"" + "\r\n"
-            + "\r\n" + date + "\r\n"
-            + "--" + HttpRequestBuilder::BOUNDARY + "--\r\n";
+           + "\r\n" + date + "\r\n"
+           + "--" + HttpRequestBuilder::BOUNDARY + "--\r\n";
 
+    cout<< "END BODY:" << endl;
     return body;
+}
+
+string HttpRequestBuilder::buildFile(string filePath) {
+    string file;
+    string output;
+
+    ifstream f;
+    f.open(filePath);
+
+    int index = filePath.find_last_of('/');
+    string fileName = filePath.substr(index + 1, filePath.length());
+    string line;
+    while (getline(f, line, '\0')) {
+        file = file + line;
+    }
+//    f.close();
+
+    // add content disposition
+    output = "Content-Disposition: form-data; name=\"fileName\"; filename=\"" + fileName
+             + "\"\r\n";
+    // add the content type
+    output = output + buildContentType(filePath);
+
+    // add the file string as the body
+    output = output + file + "\r\n";
+
+    output = output + "--" + HttpRequestBuilder::BOUNDARY + "\r\n";
+    cout << "END FILE: "<< endl;
+    return output;
 }
 
 string HttpRequestBuilder::buildContentType(string filePath) {
@@ -60,5 +93,5 @@ string HttpRequestBuilder::buildContentType(string filePath) {
         contentType = "file/text";
     }
 
-    return "Content-Type: " + contentType + fileType + "\r\n\r\n";
+    return "Content-Type: " + contentType + "\r\n\r\n";
 }

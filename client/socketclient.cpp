@@ -48,21 +48,21 @@ void uploadFile(int sock){
     do {
         cout << "Upload File:" << endl;
         menu.buildRequest(menu.getDataFromUser());
+        //Send HTTP request
+        strcpy(buf, menu.getRequestString().c_str());
+        if ((rval = write(sock, buf, 1024)) < 0) {
+            perror("writing socket");
+        }
+        // Get response
+        printf("%s\n", "Waiting response");
+        while ((rval = read(sock, buf, 1024)) > 0) {
+            printf("Response %s\n", buf);
+//        menu.handleResponse(buf);
+        }
         cout << "Would you like to upload another file? Y(1)/N(0)" << endl;
+        cin >> userInput;
     }while(userInput == 1);
 
-    //Send HTTP request
-    strcpy(buf, menu.getRequestString().c_str());
-    if ((rval = write(sock, buf, 1024)) < 0) {
-        perror("writing socket");
-    }
-
-    // Get response
-    printf("%s\n", "Waiting response");
-    while ((rval = read(sock, buf, 1024)) > 0) {
-        printf("Response %s\n", buf);
-//        menu.handleResponse(buf);
-    }
 }
 
 
