@@ -45,3 +45,7 @@ void FileUploadMenu::buildRequest(map <std::string, std::string> dataFromUser) {
     string date = dataFromUser.at("date");
     this->setRequestString(HttpRequestBuilder::buildMultipartRequest(filePath, caption, date));
 }
+
+void FileUploadMenu::handleResponse(char *res) {
+
+}
