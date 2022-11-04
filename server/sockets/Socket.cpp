@@ -6,32 +6,36 @@
 #include <string.h>
 #include <stdio.h>
 
-Socket::Socket(int sock){
-	this->sock = sock;
+Socket::Socket(int sock)
+{
+  this->sock = sock;
 }
 
-char* Socket::getRequest(){
+char *Socket::getNext()
+{
   int rval; // Return value
-  char *buf = new char[1024];
+  char *buf = new char[1];
 
-  if ((rval = read(sock, buf, 1024)) < 0){
+  if ((rval = read(sock, buf, 1)) < 0)
+  {
     perror("reading socket");
-  } else {
-    printf("%s\n",buf);
+    buf[0] = -1;
+    return buf;
   }
-
-	return buf;
+  return buf;
 }
 
-void Socket::sendResponse(char *res){
-int rval;
+void Socket::sendResponse(char *res)
+{
+  int rval;
 
-  if ((rval = write(sock, res, strlen(res))) < 0){
+  if ((rval = write(sock, res, strlen(res))) < 0)
+  {
     perror("writing socket");
-  }else  {
-    printf("%s\n",res);
+    *res = -1;
   }
 
-	return;
+  printf("%s\n", res);
+  return;
 }
-Socket::~Socket(){}
+Socket::~Socket() {}
