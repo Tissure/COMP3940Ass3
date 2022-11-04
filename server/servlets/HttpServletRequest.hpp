@@ -91,6 +91,11 @@ private:
     bool isMatch(string str, string pattern);
 
     /**
+     * Returns true is pattern is in string
+     */
+    bool hasPattern(string str, string patter);
+
+    /**
      * This will create a string of character up to the delimiter
      * from the classes socket.
      */
