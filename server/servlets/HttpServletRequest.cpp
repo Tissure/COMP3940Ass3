@@ -13,8 +13,7 @@
 void HttpServletRequest::parseRequest()
 {
     parseHead();
-
-    cout << this->getMethod() << " " << this->url << " " << this->version << endl;
+    parseHeaders();
 }
 
 void HttpServletRequest::parseHead()
@@ -22,13 +21,13 @@ void HttpServletRequest::parseHead()
 
     string head = getNext("\n\r");
 
-    cout << "Head: " << head << endl;
+    // cout << "Head : " << head << endl;
+
     int type = 0;
     string value;
     for (int i = 0; i < head.size(); i++)
     {
         value += head[i];
-        cout << "Value: " << value << endl;
         if (head[i] == ' ')
         {
             switch (type)
@@ -50,17 +49,28 @@ void HttpServletRequest::parseHead()
     this->version = value;
 };
 
-void HttpServletRequest::parseHeaders(){
+void HttpServletRequest::parseHeaders()
+{
+    string h = getNext("\n\r\n\r");
 
-    // while (*(raw + pos) != '\n' || *(raw + pos + 3) != '\r')
-    //     pos++;
+    int n = h.length();
 
-    // pos = pos + 3;
-    // this->headers = pos;
+    // declaring character array
+    char headers[n + 1];
 
-    // std::cout << "HEADERS: " << endl;
-    // for (int i = this->head; i < this->headers; i++)
-    //     cout << *(raw + i);
+    // copying the contents of the
+    // string to char array
+    strcpy(headers, h.c_str());
+
+    int cursor = 0;
+    string key = getNext(headers + cursor, n, ":", &cursor);
+
+    // skip over :
+    cursor++
+
+        string value = getNext(headers + cursor, n, "\n\r", &cursor);
+
+    cout << "Key: " << key << " Value: " << value << endl;
 };
 
 void HttpServletRequest::parseBody(){
@@ -83,8 +93,6 @@ HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
 
 string HttpServletRequest::getNext(string pattern)
 {
-
-    // Set up table.
     size_t patternLength = pattern.size();
 
     string result;
@@ -94,9 +102,31 @@ string HttpServletRequest::getNext(string pattern)
     while (*(character = socket->getNext()) != EOF && !isMatch(result, pattern))
     {
         result += *character;
+        // cout << result << endl;
     }
 
     return result;
+}
+
+string HttpServletRequest::getNext(char *str, int size, string pattern, int *cursor)
+{
+    string result;
+    if (size < pattern.size())
+    {
+        return str;
+    }
+
+    for (int i = 0; i < size; i++)
+    {
+        result += *str;
+        if (isMatch(result, pattern))
+        {
+            return result;
+        }
+        *(str++);
+        (*cursor)++;
+    }
+    result += result;
 }
 
 bool HttpServletRequest::isMatch(string str, string pattern)

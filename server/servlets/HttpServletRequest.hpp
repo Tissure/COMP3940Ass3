@@ -16,6 +16,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <cstring>
 
 #include "../sockets/Socket.h"
 
@@ -86,6 +87,11 @@ private:
      * from the classes socket.
      */
     string getNext(string delim);
+
+    /**
+     * This will create a string of character up to the delimiter.
+     */
+    string getNext(char *str, int size, string pattern, int *cursor);
 };
 
 #endif // C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

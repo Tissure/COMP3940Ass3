@@ -55,7 +55,10 @@ int main()
  *
  * Head is parsed!!! blap blap ma ma
  *
- * Next is the headers. Dude thos getNext anf isMatch functions make my life so easy!!
+ * Next is the headers. Dude this getNext anf isMatch functions make my life so easy!!
+ * I made another getNext method, this one takes in a cursor and moves it along the string
+ * you passed in.
  *
+ * Im gonna go smoke a J***T see yeah
  *
  */
