@@ -31,11 +31,11 @@ int main() {
         perror("connecting");
     }
 
-    strcpy(buf, "GET /somedir/page.html HTTP/1.1\n\r"
-                "HOST:www.sameschool.edu\n\r"
-                "Connection:close\n\r"
-                "User-agent:Mozzilla/4.0\n\r"
-                "Accept Language: fr\n\r\n\r"
+    strcpy(buf, "GET /somedir/page.html HTTP/1.1\r\n"
+                "HOST:www.sameschool.edu\r\n"
+                "Connection:close\r\n"
+                "User-agent:Mozzilla/4.0\r\n"
+                "Accept Language: fr\r\n\r\n"
     );
 
     if ((rval = write(sock, buf, 1024)) < 0) {

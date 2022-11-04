@@ -10,34 +10,29 @@
  *
  * Then call helper methods to parse each.
  */
-void HttpServletRequest::parseRequest()
-{
+void HttpServletRequest::parseRequest() {
     parseHead();
     parseHeaders();
     cout << *this << endl;
 }
 
-void HttpServletRequest::parseHead()
-{
+void HttpServletRequest::parseHead() {
     string head = getNext(HEAD_BOUNDRY);
 
     int type = 0;
     string value;
-    for (int i = 0; i < head.size(); i++)
-    {
+    for (int i = 0; i < head.size(); i++) {
         value += head[i];
-        if (head[i] == ' ')
-        {
-            switch (type)
-            {
-            case 0:
-                this->method = this->stringToMethod(value);
-                break;
-            case 1:
-                this->url = value;
-                break;
-            default:
-                break;
+        if (head[i] == ' ') {
+            switch (type) {
+                case 0:
+                    this->method = this->stringToMethod(value);
+                    break;
+                case 1:
+                    this->url = value;
+                    break;
+                default:
+                    break;
             }
             value = "";
             type++;
@@ -47,8 +42,7 @@ void HttpServletRequest::parseHead()
     this->version = value;
 };
 
-void HttpServletRequest::parseHeaders()
-{
+void HttpServletRequest::parseHeaders() {
     string h = getNext(HEADER_BOUNDRY);
 
     int n = h.length();
@@ -62,8 +56,7 @@ void HttpServletRequest::parseHeaders()
 
     int cursor = 0;
 
-    while (cursor < n)
-    {
+    while (cursor < n) {
         string key = getNext(headers + cursor, n, ":", &cursor);
 
         // skip over :
@@ -77,13 +70,12 @@ void HttpServletRequest::parseHeaders()
     }
 };
 
-void HttpServletRequest::parseBody(){
+void HttpServletRequest::parseBody() {
     // std::cout << body << std::endl;
 };
 
-HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
-{
-    for (auto &c : method)
+HttpServletRequest::Method HttpServletRequest::stringToMethod(string method) {
+    for (auto &c: method)
         c = toupper(c);
 
     if (method == "POST")
@@ -95,59 +87,58 @@ HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
     return Method::GET;
 }
 
-string HttpServletRequest::getNext(string pattern)
-{
+string HttpServletRequest::getNext(string pattern) {
     size_t patternLength = pattern.size();
 
     string result;
     char *character;
 
     // Read socket into string.
-    while (*(character = socket->getNext()) != EOF && !isMatch(result + *character, pattern))
-    {
+    while (*(character = socket->getNext()) != EOF && !isMatch(result + *character, pattern)) {
         result += *character;
     }
 
     return result;
 }
 
-string HttpServletRequest::getNext(char *str, int size, string pattern, int *cursor)
-{
+string HttpServletRequest::getNext(char *str, int size, string pattern, int *cursor) {
     string result;
-    if (size < pattern.size() || *cursor >= size)
-    {
+    if (size < pattern.size() || *cursor >= size) {
         return "";
     }
 
-    for (int i = 0; i < size; i++)
-    {
-
-        if (*cursor >= size)
-        {
+    for (int i = 0; i < size; i++) {
+        if (*cursor >= size) {
             return "";
         }
 
         result += *str;
-        if (isMatch(result, pattern))
-        {
-            // Remove pattern from string
-            result.resize(result.size() - pattern.size());
-            return result;
+
+
+        (*cursor)++;
+
+        if (isMatch(result, pattern)) {
+//            if(result[0] == pattern[0]){
+//                //remove pattern from start of string
+////                result = result[pattern.size()];
+//                result = result.substr(pattern.size(), result.size());
+//            } else {
+                // Remove pattern from string
+                result.resize(result.size() - pattern.size());
+                return result;
+//            }
         }
 
         *(str++);
-        (*cursor)++;
     }
     result += result;
 }
 
-bool HttpServletRequest::isMatch(string str, string pattern)
-{
+bool HttpServletRequest::isMatch(string str, string pattern) {
     if (pattern.size() > str.size())
         return false;
 
-    for (int i = 0; i < pattern.size(); i++)
-    {
+    for (int i = 0; i < pattern.size(); i++) {
         if (str[str.size() - 1 - i] != pattern[pattern.size() - 1 - i])
             return false;
     }
@@ -158,12 +149,10 @@ bool HttpServletRequest::isMatch(string str, string pattern)
 /**
  * Returns true if key is an edge case.
  */
-bool HttpServletRequest::headerEdgeCases(string key, string value)
-{
+bool HttpServletRequest::headerEdgeCases(string key, string value) {
     cout << "EDGE CASES: " << key << "--54545|--" << value << endl;
     // Check to see if it form "Content-Type:multipart/form-data"
-    if (key == CT && value == CT_MULTI_PART_FORM_DATA)
-    {
+    if (key == CT && value == CT_MULTI_PART_FORM_DATA) {
         return true;
     }
     return false;
@@ -172,16 +161,14 @@ bool HttpServletRequest::headerEdgeCases(string key, string value)
 /**
  * Appends key, value to headerMap
  */
-void HttpServletRequest::appendHeader(string key, string value)
-{
+void HttpServletRequest::appendHeader(string key, string value) {
     cout << "Append Header" << endl;
     // Its lie to call this headerEdgeCases, becuase we
     // are only checking for multipart/form-data
     // &()
     // But i called it headerEdgeCases because its more VERBOSE!
     // :()::<>::{}::~~
-    if (headerEdgeCases(key, value))
-    {
+    if (headerEdgeCases(key, value)) {
         cout << "IN EDGE CASE HANDLER" << endl;
 
         int n = value.length();
@@ -208,13 +195,11 @@ void HttpServletRequest::appendHeader(string key, string value)
     this->headersMap.insert(pair<string, string>(key, value));
 };
 
-ostream &operator<<(ostream &os, const HttpServletRequest &request)
-{
+ostream &operator<<(ostream &os, const HttpServletRequest &request) {
 
     os << request.method << " " << request.url << " " << request.version << endl;
 
-    for (auto const &x : request.headersMap)
-    {
+    for (auto const &x: request.headersMap) {
         os << x.first // string (key)
            << ':'
            << x.second

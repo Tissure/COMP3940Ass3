@@ -12,8 +12,8 @@
 #define URL_ORDER 1
 #define CARIGE '\r'
 #define NEW_LINE '\n'
-#define HEAD_BOUNDRY "\n\r"
-#define HEADER_BOUNDRY "\n\r\n\r"
+#define HEAD_BOUNDRY "\r\n"
+#define HEADER_BOUNDRY "\r\n\r\n"
 #define CT "Content-Type"
 #define CT_MULTI_PART_FORM_DATA "multipart/form-data"
 
