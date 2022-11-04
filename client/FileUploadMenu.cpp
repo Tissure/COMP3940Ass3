@@ -47,5 +47,19 @@ void FileUploadMenu::buildRequest(map <std::string, std::string> dataFromUser) {
 }
 
 void FileUploadMenu::handleResponse(char *res) {
-
+//    string fileName = null;
+    cout << "File names returned from the server: "<< endl;
+    for (int i = 0; i < 1024; ++i) {
+        cout << res[i];
+    }
+//    try {
+//        // move until we reach the body of the response
+//        while (in.readLine() != "\r\n\r\n" && !in.readLine().isEmpty());
+//        // read the body of the response
+//        while ((fileName = in.readLine()) != null) {
+//            System.out.println(fileName);
+//        }
+//    } catch (IOException e) {
+//        e.printStackTrace();
+//    }
 }

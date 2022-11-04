@@ -1,3 +1,6 @@
 /server/server
 /server/images
 /client/client
+cmake-build-debug
+/server/cmake-build-debug
+/client/cmake-build-debug
