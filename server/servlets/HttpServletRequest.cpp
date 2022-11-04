@@ -18,7 +18,6 @@ void HttpServletRequest::parseRequest()
 
 void HttpServletRequest::parseHead()
 {
-
     string head = getNext("\n\r");
 
     // cout << "Head : " << head << endl;
@@ -53,6 +52,7 @@ void HttpServletRequest::parseHeaders()
 {
     string h = getNext("\n\r\n\r");
 
+    cout << h << endl;
     int n = h.length();
 
     // declaring character array
@@ -63,14 +63,19 @@ void HttpServletRequest::parseHeaders()
     strcpy(headers, h.c_str());
 
     int cursor = 0;
-    string key = getNext(headers + cursor, n, ":", &cursor);
 
-    // skip over :
-    cursor++
+    while (cursor < n)
+    {
+        string key = getNext(headers + cursor, n, ":", &cursor);
 
+        // skip over :
+        cursor++;
         string value = getNext(headers + cursor, n, "\n\r", &cursor);
 
-    cout << "Key: " << key << " Value: " << value << endl;
+        if (key == "" || value == "")
+            break;
+        cout << "Key: " << key << " Value: " << value << endl;
+    }
 };
 
 void HttpServletRequest::parseBody(){
@@ -111,13 +116,20 @@ string HttpServletRequest::getNext(string pattern)
 string HttpServletRequest::getNext(char *str, int size, string pattern, int *cursor)
 {
     string result;
-    if (size < pattern.size())
+    if (size < pattern.size() || *cursor >= size)
     {
-        return str;
+        return "";
     }
 
     for (int i = 0; i < size; i++)
     {
+
+        if (*cursor >= size)
+        {
+            return "";
+        }
+
+        cout << *cursor << " " << size << endl;
         result += *str;
         if (isMatch(result, pattern))
         {

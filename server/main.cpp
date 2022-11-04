@@ -29,7 +29,7 @@ int main()
 
 /**
  * The tail of moving a socket from router to httpServletRequest and parsing
- * the request. So far i have made progress.
+ * the request. So far i have made progress......
  *
  * im  listening to this if you want to join in.
  * https://youtu.be/i4gebic_Wnc
@@ -55,10 +55,22 @@ int main()
  *
  * Head is parsed!!! blap blap ma ma
  *
- * Next is the headers. Dude this getNext anf isMatch functions make my life so easy!!
+ * Next is the headers. Dude this getNext and isMatch functions make my life so easy!!
  * I made another getNext method, this one takes in a cursor and moves it along the string
  * you passed in.
  *
  * Im gonna go smoke a J***T see yeah
+ *
+ * So yo, i got the header, key value parsing working. Im gonna work on the edge cases,
+ * I dont care about anything else except content-type.
+ *
+ * Wish me luck :<>
+ * This is what im watching currently
+ * https://www.youtube.com/watch?v=Ze0kq-ROeaU <-- @adriend
+ *
+ * also this
+ * https://www.youtube.com/watch?v=gNUAm1I_bu8 <-- @urinatingtree
+ *
+ *
  *
  */
