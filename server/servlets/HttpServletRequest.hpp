@@ -12,6 +12,10 @@
 #define URL_ORDER 1
 #define CARIGE '\r'
 #define NEW_LINE '\n'
+#define HEAD_BOUNDRY "\n\r"
+#define HEADER_BOUNDRY "\n\r\n\r"
+#define CT "Content-Type"
+#define CT_MULTI_PART_FORM_DATA "multipart/form-data"
 
 #include <map>
 #include <string>
@@ -66,13 +70,17 @@ private:
     // Body
     map<string, string> bodyMap;
 
+    // multipart/form-data bounrdry
+    string boundry;
+
     /**
      * Parses request
      * @author Ravinder Shokar
      * @param request
      * @return char *
      */
-    void parseRequest();
+    void
+    parseRequest();
     void parseHead();
     void parseHeaders();
     void parseBody();
@@ -92,6 +100,21 @@ private:
      * This will create a string of character up to the delimiter.
      */
     string getNext(char *str, int size, string pattern, int *cursor);
+
+    /**
+     * Returns true if key is an edge case.
+     */
+    bool headerEdgeCases(string key, string value);
+
+    /**
+     * Appends key, value to headerMap
+     */
+    void appendHeader(string key, string value);
+
+    /**
+     * F**g overloaded operator
+     */
+    friend ostream &operator<<(ostream &os, const HttpServletRequest &request);
 };
 
 #endif // C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

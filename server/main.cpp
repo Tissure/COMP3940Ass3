@@ -66,11 +66,21 @@ int main()
  *
  * Wish me luck :<>
  * This is what im watching currently
- * https://www.youtube.com/watch?v=Ze0kq-ROeaU <-- @adriend
+ * https://www.youtube.com/watch?v=Ze0kq-ROeaU <-- @adrien
  *
  * also this
  * https://www.youtube.com/watch?v=gNUAm1I_bu8 <-- @urinatingtree
  *
+ * Im too tired and i cant process the info. Im gonna get some chips
+ * and pass the fuck out.
  *
+ * Hello everyone, im back at it with clayton.
  *
+ * Clayton? would you like to say a couple word?:
+ *
+ * // This is Clayton
+ * bitch @clayonHunter
+ * // Clayton has finished streaming
+ *
+ * Kyle just walked in, I felt tingles all over my skin.
  */

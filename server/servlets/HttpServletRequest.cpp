@@ -14,13 +14,12 @@ void HttpServletRequest::parseRequest()
 {
     parseHead();
     parseHeaders();
+    cout << *this << endl;
 }
 
 void HttpServletRequest::parseHead()
 {
-    string head = getNext("\n\r");
-
-    // cout << "Head : " << head << endl;
+    string head = getNext(HEAD_BOUNDRY);
 
     int type = 0;
     string value;
@@ -50,9 +49,8 @@ void HttpServletRequest::parseHead()
 
 void HttpServletRequest::parseHeaders()
 {
-    string h = getNext("\n\r\n\r");
+    string h = getNext(HEADER_BOUNDRY);
 
-    cout << h << endl;
     int n = h.length();
 
     // declaring character array
@@ -70,11 +68,12 @@ void HttpServletRequest::parseHeaders()
 
         // skip over :
         cursor++;
-        string value = getNext(headers + cursor, n, "\n\r", &cursor);
+        string value = getNext(headers + cursor, n, HEAD_BOUNDRY, &cursor);
 
         if (key == "" || value == "")
             break;
-        cout << "Key: " << key << " Value: " << value << endl;
+
+        appendHeader(key, value);
     }
 };
 
@@ -104,10 +103,9 @@ string HttpServletRequest::getNext(string pattern)
     char *character;
 
     // Read socket into string.
-    while (*(character = socket->getNext()) != EOF && !isMatch(result, pattern))
+    while (*(character = socket->getNext()) != EOF && !isMatch(result + *character, pattern))
     {
         result += *character;
-        // cout << result << endl;
     }
 
     return result;
@@ -129,12 +127,14 @@ string HttpServletRequest::getNext(char *str, int size, string pattern, int *cur
             return "";
         }
 
-        cout << *cursor << " " << size << endl;
         result += *str;
         if (isMatch(result, pattern))
         {
+            // Remove pattern from string
+            result.resize(result.size() - pattern.size());
             return result;
         }
+
         *(str++);
         (*cursor)++;
     }
@@ -153,4 +153,72 @@ bool HttpServletRequest::isMatch(string str, string pattern)
     }
 
     return true;
+}
+
+/**
+ * Returns true if key is an edge case.
+ */
+bool HttpServletRequest::headerEdgeCases(string key, string value)
+{
+    cout << "EDGE CASES: " << key << "--54545|--" << value << endl;
+    // Check to see if it form "Content-Type:multipart/form-data"
+    if (key == CT && value == CT_MULTI_PART_FORM_DATA)
+    {
+        return true;
+    }
+    return false;
+};
+
+/**
+ * Appends key, value to headerMap
+ */
+void HttpServletRequest::appendHeader(string key, string value)
+{
+    cout << "Append Header" << endl;
+    // Its lie to call this headerEdgeCases, becuase we
+    // are only checking for multipart/form-data
+    // &()
+    // But i called it headerEdgeCases because its more VERBOSE!
+    // :()::<>::{}::~~
+    if (headerEdgeCases(key, value))
+    {
+        cout << "IN EDGE CASE HANDLER" << endl;
+
+        int n = value.length();
+
+        // declaring character array
+        char valueArray[n + 1];
+
+        // copying the contents of the
+        // string to char array
+        strcpy(valueArray, value.c_str());
+
+        // cout << "EDGE CASE: " << endl;
+        int cursor = 0;
+        int size = value.size();
+
+        string tempVal = getNext(valueArray, size, " ", &cursor);
+
+        cout << "KEY: " << key << " VALUE: " << value << endl;
+
+        string tempBoundry = getNext(valueArray, size, HEAD_BOUNDRY, &cursor);
+
+        cout << "BOUNDRY: " << tempBoundry << endl;
+    }
+    this->headersMap.insert(pair<string, string>(key, value));
+};
+
+ostream &operator<<(ostream &os, const HttpServletRequest &request)
+{
+
+    os << request.method << " " << request.url << " " << request.version << endl;
+
+    for (auto const &x : request.headersMap)
+    {
+        os << x.first // string (key)
+           << ':'
+           << x.second
+           << endl; // string's value
+    }
+    return os;
 }
