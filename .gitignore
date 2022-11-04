@@ -4,3 +4,7 @@
 .editorconfig
 .idea
 .vscode
+
+/server/server.exe
+/client/client.exe
+/server/server.exe.stackdump

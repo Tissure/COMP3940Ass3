@@ -10,6 +10,10 @@
 #include "../servlets/Http/HttpServletResponse.hpp"
 #include "../servlets/UploadServlet.hpp"
 
+#include <iostream>
+
+using namespace std;
+
 Router::Router(Socket *sock): Thread(this) {
     this->sock = sock;
 }
@@ -29,7 +33,7 @@ void Router::run(){
                 endPoint.doPost(httpRequest, httpResponse);
                 break;
             default:
-                ;
+                endPoint.doGet(httpRequest, httpResponse);
         }
         sock->sendResponse(httpResponse.getResponse());
         //

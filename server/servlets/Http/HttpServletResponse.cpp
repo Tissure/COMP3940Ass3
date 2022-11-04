@@ -31,6 +31,4 @@ void HttpServletResponse::buildResponse() {
 
     // append the body
     responseStr.append(*bodyStr);
-
-    cout << responseStr << endl;
 }

@@ -22,11 +22,11 @@ private:
     string responseStr;
     string *bodyStr;
 
+    void buildResponse();
+
 public:
     HttpServletResponse();
     ~HttpServletResponse();
-
-    void buildResponse();
 
     void addHeader(const string& key, const string& val) {
         headers.insert(make_pair(key, val));
@@ -48,6 +48,7 @@ public:
     }
 
     char* getResponse() {
+        buildResponse();
         char stuff[responseStr.length() + 1];
         return strcpy(stuff, responseStr.c_str());
     }
