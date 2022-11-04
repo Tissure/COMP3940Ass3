@@ -3,9 +3,6 @@
 //
 
 #pragma once
-#ifndef C_WRAPPERS_HTTPSERVLETRESQUEST_HPP
-#define C_WRAPPERS_HTTPSERVLETRESQUEST_HPP
-
 
 using namespace std;
 
@@ -25,5 +22,3 @@ private:
     char * rawRequest;
 };
 
-
-#endif //C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

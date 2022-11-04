@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 
-
 ServerSocket::ServerSocket(int port)
 {
   sock = socket (AF_INET, SOCK_STREAM, 0);

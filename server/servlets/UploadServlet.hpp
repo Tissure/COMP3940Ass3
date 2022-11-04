@@ -4,15 +4,9 @@
 #pragma once
 #include "Http/HttpServlet.hpp"
 
-#ifndef C_WRAPPERS_UPLOADSERVLET_HPP
-#define C_WRAPPERS_UPLOADSERVLET_HPP
-
 
 class UploadServlet : public HttpServlet {
 public:
     void doGet(HttpServletRequest, HttpServletResponse) override;
     void doPost(HttpServletRequest, HttpServletResponse) override;
 };
-
-
-#endif //C_WRAPPERS_UPLOADSERVLET_HPP
