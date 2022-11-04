@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <string.h>
 
-int main() {
+int main()
+{
     int sock;
     struct sockaddr_in server;
     int msgsock;
@@ -17,33 +18,32 @@ int main() {
     int rval;
 
     sock = socket(AF_INET, SOCK_STREAM, 0);
-    if (sock < 0) {
+    if (sock < 0)
+    {
         perror("opening stream socket");
     }
 
     bzero(&server, sizeof(server));
     hp = gethostbyname("localhost");
-    bcopy((char *) hp->h_addr, (char *) &server.sin_addr, hp->h_length);
+    bcopy((char *)hp->h_addr, (char *)&server.sin_addr, hp->h_length);
     server.sin_family = AF_INET;
     server.sin_port = 8888;
 
-    if (connect(sock, (struct sockaddr *) &server, sizeof(server)) < 0) {
+    if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0)
+    {
         perror("connecting");
     }
 
-    strcpy(buf, "GET /somedir/page.html HTTP/1.1\r\n"
-                "HOST:www.sameschool.edu\r\n"
-                "Connection:close\r\n"
-                "User-agent:Mozzilla/4.0\r\n"
-                "Accept Language: fr\r\n\r\n"
-    );
+    strcpy(buf, "GET /somedir/page.html HTTP/1.1\r\nHOST:www.sameschool.edu\r\nConnection:close\r\nUser-agent:Mozzilla/4.0\r\nAccept Language: fr\r\nContent-Type:multipart/form-data; boundry=ABCD1234\r\n");
 
-    if ((rval = write(sock, buf, 1024)) < 0) {
+    if ((rval = write(sock, buf, 1024)) < 0)
+    {
         perror("writing socket");
     }
 
     printf("%s\n", "Waiting response");
-    while ((rval = read(sock, buf, 1024)) > 0) {
+    while ((rval = read(sock, buf, 1024)) > 0)
+    {
         printf("Response %s\n", buf);
     }
     close(sock);

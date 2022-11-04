@@ -142,7 +142,7 @@ string HttpServletRequest::getNext(char *str, int size, string pattern, int *cur
 
 bool HttpServletRequest::isMatch(string str, string pattern)
 {
-    if (pattern.size() > str.size())
+    if (pattern.size() > str.size() || pattern == "")
         return false;
 
     for (int i = 0; i < pattern.size(); i++)
@@ -179,8 +179,8 @@ bool HttpServletRequest::hasPattern(string str, string pattern)
  */
 bool HttpServletRequest::headerEdgeCases(string key, string value)
 {
-    cout << "EDGE CASES: " << key << " --54545|-- " << value << endl;
-    cout << "IS EDGE CASE " << (key == CT) << " --54545|-- " << (CT_MULTI_PART_FORM_DATA == value) << endl;
+    // cout << "EDGE CASES: " << key << " --54545|-- " << value << endl;
+    // cout << "IS EDGE CASE " << (key == CT) << " --54545|-- " << hasPattern(value, CT_MULTI_PART_FORM_DATA) << endl;
 
     // Check to see if it form "Content-Type:multipart/form-data"
     if (key == CT && hasPattern(value, CT_MULTI_PART_FORM_DATA))
@@ -208,19 +208,20 @@ void HttpServletRequest::appendHeader(string key, string value)
         // declaring character array
         char v[n + 1];
 
-        // copying the contents of the
-        // string to char array
+        // copying the contents of the string to char array
         strcpy(v, value.c_str());
         int cursor = 0;
 
-        cout << "IN EDGE CASE HANDLER: " << v << " Cursor: " << cursor << endl;
+        // Seperate value into two values.
         value = getNext(v, n, "; ", &cursor);
-        cout << "IN EDGE CASE HANDLER: " << (v + cursor) << " Cursor: " << cursor << endl;
-        string tempBoundry = getNext(v, n, "=", &cursor);
-        cout << "IN EDGE CASE HANDLER: " << (v + cursor) << " Cursor: " << cursor << endl;
-        // this->boundry = getNext(v, n, "", &cursor);
-        // cout << "IN EDGE CASE HANDLER: " << (v + cursor) << endl;
-        cout << "BOUNDRY: " << tempBoundry << endl;
+
+        // Remove boundry=
+        getNext(v + cursor, n, "=", &cursor);
+
+        // Get rest of string to add to boundry
+        this->boundry = getNext(v + cursor, n, "", &cursor);
+
+        // cout << "BOUNDRY: " << this->boundry << endl;
     }
     this->headersMap.insert(pair<string, string>(key, value));
 };
