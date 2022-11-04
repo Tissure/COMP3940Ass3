@@ -57,7 +57,7 @@ void uploadFile(int sock){
         printf("%s\n", "Waiting response");
         while ((rval = read(sock, buf, 1024)) > 0) {
             printf("Response %s\n", buf);
-//        menu.handleResponse(buf);
+        menu.handleResponse(buf);
         }
         cout << "Would you like to upload another file? Y(1)/N(0)" << endl;
         cin >> userInput;
