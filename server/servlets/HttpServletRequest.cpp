@@ -14,15 +14,13 @@ void HttpServletRequest::parseRequest()
 {
     parseHead();
     parseHeaders();
+    parseBody();
     cout << *this << endl;
 }
 
 void HttpServletRequest::parseHead()
 {
     string head = getNext(HEAD_BOUNDRY);
-
-    cout << "HEAD: \n"
-         << head << endl;
     int type = 0;
     string value;
     for (int i = 0; i < head.size(); i++)
@@ -76,8 +74,21 @@ void HttpServletRequest::parseHeaders()
     }
 };
 
-void HttpServletRequest::parseBody(){
-    // std::cout << body << std::endl;
+void HttpServletRequest::parseBody()
+{
+    cout << headersMap.find(CT)->first << endl;
+    // Becuase we only care about multipart/form-data we will check
+    // for it. If we dont see it, im gonna write the body to a
+    // string
+    if (false && headersMap.count(CT) > 0 && headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
+    {
+        cout << "Content-Type/form-data" << endl;
+        return;
+    }
+
+    std::vector<char> body;
+    this->socket->dump(body);
+    this->body = body;
 };
 
 HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
@@ -104,9 +115,10 @@ string HttpServletRequest::getNext(string pattern)
     // Read socket into string.
     while (*(character = socket->getNext()) != EOF && !isMatch(result + *character, pattern))
     {
-
         result += *character;
     }
+
+    delete character;
 
     return result;
 }
@@ -195,7 +207,6 @@ bool HttpServletRequest::headerEdgeCases(string key, string value)
  */
 void HttpServletRequest::appendHeader(string key, string value)
 {
-    cout << "Append Header" << endl;
     // Its lie to call this headerEdgeCases, becuase we
     // are only checking for multipart/form-data
     // &()
@@ -226,17 +237,38 @@ void HttpServletRequest::appendHeader(string key, string value)
     this->headersMap.insert(pair<string, string>(key, value));
 };
 
-ostream &operator<<(ostream &os, const HttpServletRequest &request)
+ostream &operator<<(ostream &os, const HttpServletRequest &req)
 {
 
-    os << request.method << " " << request.url << " " << request.version << endl;
+    os << req.method << " " << req.url << " " << req.version << endl;
 
-    for (auto const &x : request.headersMap)
+    for (auto const &x : req.headersMap)
     {
         os << x.first // string (key)
            << ':'
            << x.second
            << endl; // string's value
     }
+
+    os << "Boundry: " << req.boundry << endl;
+
+    if (req.headersMap.count(CT) > 0 && req.headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
+    {
+        // Print body map
+
+        // FUCK! I had to use an else statement
+    }
+    else
+    {
+        std::vector<char>::const_iterator it = req.body.begin();
+        std::vector<char>::const_iterator end = req.body.end();
+
+        int pos = 0;
+        while ((it + pos) < end)
+        {
+            os << (char)*(it + pos++);
+        }
+    }
+
     return os;
 }

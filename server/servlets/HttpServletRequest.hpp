@@ -21,6 +21,7 @@
 #include <string>
 #include <iostream>
 #include <cstring>
+#include <vector>
 
 #include "../sockets/Socket.h"
 
@@ -57,7 +58,6 @@ public:
 
 private:
     Socket *socket;
-    int body = MAX_REQUEST_SIZE;
 
     // Head
     Method method;
@@ -68,6 +68,9 @@ private:
     map<string, string> headersMap;
 
     // Body
+    std::vector<char> body;
+
+    // If is form type
     map<string, string> bodyMap;
 
     // multipart/form-data bounrdry

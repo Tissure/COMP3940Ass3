@@ -88,4 +88,24 @@ int main()
  *  Bout to fix Rav's code
  *
  *  Fixed rav's code :)
+ *
+ * // Rav jumping back
+ * F**k you kyle, i was there beside you. And you don't give
+ * me any creadit?
+ *
+ * Anyways, we are know in 3522 lecture and Jeff is talking about
+ * assignment 2. I should probably pay attention, that cost nothing.
+ *
+ * Anyhow I got the headers parsed fully!!! Eat my....jeff said something important
+ * and i didn't write it down.
+ *
+ * Some thing just happened. I have to eat my shoe. I have got my self into
+ * a corner. I am used an else block!!!! I have told all to not use else blocks.
+ * I'm embarassed and will whip myself 10 times.
+ *
+ * Peace and love .... peace and love V
+ *
+ * I finished making a function for the Socket class called dump()
+ * dump(std::vector<char> &result). The Scoets contents will be dumped
+ * into the passed in vector.
  */

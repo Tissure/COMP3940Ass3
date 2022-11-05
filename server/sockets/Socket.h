@@ -1,4 +1,8 @@
 #pragma once
+
+#include <string.h>
+#include <vector>
+
 class Socket
 {
 public:
@@ -10,6 +14,7 @@ public:
 	char *getNext();
 	void sendResponse(char *res);
 	~Socket();
+	void dump(std::vector<char> &result);
 
 private:
 	int sock;

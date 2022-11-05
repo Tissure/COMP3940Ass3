@@ -3,7 +3,6 @@
 #include <sys/types.h>
 #include <resolv.h>
 #include <unistd.h>
-#include <string.h>
 #include <stdio.h>
 
 Socket::Socket(int sock)
@@ -39,3 +38,20 @@ void Socket::sendResponse(char *res)
   return;
 }
 Socket::~Socket() {}
+
+/**
+ * DAAMM code you got a lot of DUMP!
+ * That code do so much in so little code.
+ */
+void Socket::dump(std::vector<char> &result)
+{
+  int rval;
+  char *buf;
+
+  while (*(buf = getNext()) != EOF)
+  {
+    result.push_back(*buf);
+  }
+
+  delete buf;
+}
