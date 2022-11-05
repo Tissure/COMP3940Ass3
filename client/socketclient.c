@@ -44,16 +44,14 @@ int main()
                 "Connection: keep-alive\r\n"
                 "Content-Type: multipart/form-data; boundary=---------------------------9051914041544843365972754266\r\n"
                 "Content-Length: 554\r\n\r\n"
-                "-----------------------------9051914041544843365972754266"
-                "Content-Disposition: form-data; name=\"text\""
-                "text default"
-                "-----------------------------9051914041544843365972754266"
-                "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\""
-                "Content-Type: text/plain"
-                "Content of a.txt."
-                "-----------------------------9051914041544843365972754266"
-                "Content-Disposition: form-data; name=\"file2\"; filename=\"a.html\""
-                "Content-Type: text/html");
+                "-----------------------------9051914041544843365972754266\r\n"
+                "Content-Disposition: form-data; name=\"text\"\r\n\r\n"
+                "text default\r\n"
+                "-----------------------------9051914041544843365972754266\r\n"
+                "Content-Disposition: form-data; name=\"file1\"; filename=\"a.txt\"\r\n"
+                "Content-Type: text/plain\r\n\r\n"
+                "Content of a.txt.\r\n"
+                "-----------------------------9051914041544843365972754266--");
 
     if ((rval = write(sock, buf, 1024)) < 0)
     {

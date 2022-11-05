@@ -10,18 +10,18 @@
 #define ASCII_TABLE_LENGTH 127
 #define METHOD_ORDER 0
 #define URL_ORDER 1
-#define CARIGE '\r'
-#define NEW_LINE '\n'
-#define HEAD_BOUNDRY "\r\n"
-#define HEADER_BOUNDRY "\r\n\r\n"
+#define LINE "\r\n"
+#define BOUNDRY "\r\n\r\n"
 #define CT "Content-Type"
 #define CT_MULTI_PART_FORM_DATA "multipart/form-data"
+#define CD "Content-Disposition:"
 
 #include <map>
 #include <string>
 #include <iostream>
 #include <cstring>
 #include <vector>
+#include <algorithm>
 
 #include "../sockets/Socket.h"
 
@@ -82,11 +82,12 @@ private:
      * @param request
      * @return char *
      */
-    void
-    parseRequest();
+    void parseRequest();
     void parseHead();
     void parseHeaders();
     void parseBody();
+    void parseMultiPart();
+    void parseMultiPartMetaData(string str, std::map<string, string> &map);
 
     /**
      * Returns true is pattern is found at the end of str
@@ -118,6 +119,13 @@ private:
      * Appends key, value to headerMap
      */
     void appendHeader(string key, string value);
+
+    void trim(string &str, char pattern);
+    void trim(string &str);
+
+    void parseContentDisposition(string line);
+
+    void streamIntoFile(string fileName);
 
     /**
      * F**g overloaded operator

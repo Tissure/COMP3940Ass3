@@ -20,7 +20,7 @@ void HttpServletRequest::parseRequest()
 
 void HttpServletRequest::parseHead()
 {
-    string head = getNext(HEAD_BOUNDRY);
+    string head = getNext(LINE);
     int type = 0;
     string value;
     for (int i = 0; i < head.size(); i++)
@@ -49,7 +49,7 @@ void HttpServletRequest::parseHead()
 
 void HttpServletRequest::parseHeaders()
 {
-    string h = getNext(HEADER_BOUNDRY);
+    string h = getNext(BOUNDRY);
 
     int n = h.length();
 
@@ -65,24 +65,25 @@ void HttpServletRequest::parseHeaders()
     while (cursor < n)
     {
         string key = getNext(headers + cursor, n, ":", &cursor);
-        string value = getNext(headers + cursor, n, HEAD_BOUNDRY, &cursor);
+        string value = getNext(headers + cursor, n, LINE, &cursor);
 
         if (key == "" || value == "")
             break;
 
+        trim(key, ' ');
+        trim(value, ' ');
         appendHeader(key, value);
     }
 };
 
 void HttpServletRequest::parseBody()
 {
-    cout << headersMap.find(CT)->first << endl;
     // Becuase we only care about multipart/form-data we will check
     // for it. If we dont see it, im gonna write the body to a
     // string
-    if (false && headersMap.count(CT) > 0 && headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
+    if (headersMap.count(CT) > 0 && headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
     {
-        cout << "Content-Type/form-data" << endl;
+        parseMultiPart();
         return;
     }
 
@@ -113,12 +114,13 @@ string HttpServletRequest::getNext(string pattern)
     char *character;
 
     // Read socket into string.
-    while (*(character = socket->getNext()) != EOF && !isMatch(result + *character, pattern))
+    while (!isMatch(result, pattern) && *(character = socket->getNext()) != EOF)
     {
         result += *character;
     }
 
-    delete character;
+    // Remove pattern from string
+    result.resize(result.size() - pattern.size());
 
     return result;
 }
@@ -140,16 +142,16 @@ string HttpServletRequest::getNext(char *str, int size, string pattern, int *cur
 
         result += *str;
         (*cursor)++;
+        *(str++);
 
         if (isMatch(result, pattern))
         {
             result.resize(result.size() - pattern.size());
             return result;
         }
-
-        *(str++);
     }
-    result += result;
+
+    return result;
 }
 
 bool HttpServletRequest::isMatch(string str, string pattern)
@@ -164,6 +166,44 @@ bool HttpServletRequest::isMatch(string str, string pattern)
     }
 
     return true;
+}
+
+void HttpServletRequest::trim(string &str, char pattern)
+{
+    int left = 0;
+    int right = str.size() - 1;
+
+    while (str[left] == pattern)
+        left++;
+
+    while (str[right] == pattern)
+        right--;
+
+    string temp = "";
+
+    while (left <= right)
+        temp += str[left++];
+
+    str = temp;
+}
+
+void HttpServletRequest::trim(string &str)
+{
+    int left = 0;
+    int right = str.size() - 1;
+
+    while (str[left] == ' ' || str[left] == '\r' || str[left] == '\n')
+        left++;
+
+    while (str[right] == ' ' || str[right] == '\r' || str[right] == '\n')
+        right--;
+
+    string temp = "";
+
+    while (left <= right)
+        temp += str[left++];
+
+    str = temp;
 }
 
 bool HttpServletRequest::hasPattern(string str, string pattern)
@@ -240,8 +280,10 @@ void HttpServletRequest::appendHeader(string key, string value)
 ostream &operator<<(ostream &os, const HttpServletRequest &req)
 {
 
-    os << req.method << " " << req.url << " " << req.version << endl;
+    os << "HEAD: \n"
+       << req.method << " " << req.url << " " << req.version << endl;
 
+    os << "\nHEADERS: \n";
     for (auto const &x : req.headersMap)
     {
         os << x.first // string (key)
@@ -252,23 +294,144 @@ ostream &operator<<(ostream &os, const HttpServletRequest &req)
 
     os << "Boundry: " << req.boundry << endl;
 
+    os << "\nBODY: \n";
     if (req.headersMap.count(CT) > 0 && req.headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
     {
         // Print body map
 
-        // FUCK! I had to use an else statement
-    }
-    else
-    {
-        std::vector<char>::const_iterator it = req.body.begin();
-        std::vector<char>::const_iterator end = req.body.end();
-
-        int pos = 0;
-        while ((it + pos) < end)
+        for (auto const &x : req.bodyMap)
         {
-            os << (char)*(it + pos++);
+            os << x.first // string (key)
+               << ':'
+               << x.second
+               << endl; // string's value
         }
+        return os;
+    }
+
+    // For some reason these had to be constants. Can anyone tell me
+    // why?
+    std::vector<char>::const_iterator it = req.body.begin();
+    std::vector<char>::const_iterator end = req.body.end();
+
+    int pos = 0;
+    while ((it + pos) < end)
+    {
+        os << (char)*(it + pos++);
     }
 
     return os;
 }
+
+void HttpServletRequest::parseMultiPart()
+{
+    // JUST TO MAKE SURE MY THREAD IS ARRIVING
+    // cout << "PARSING MULTI PART --|-- PARSING MULTI PART" << endl;
+
+    // This what i got to do.
+    // I need to read the socket line by line
+    // if i see that an image is present
+    // Im going to read it directly to a new file
+
+    // Removes first boundry
+    string line = getNext("--" + this->boundry + LINE);
+
+    while (line == "")
+    {
+        string metaData = getNext(BOUNDRY);
+        std::map<string, string> metaDataMap;
+        parseMultiPartMetaData(metaData, metaDataMap);
+
+        if (metaDataMap.count("filename") > 0)
+        {
+            // stream socket dirrectly into file
+            // Lets save this for another time.
+            this->bodyMap.insert(std::pair<string, string>{"filename", metaDataMap.find("filename")->second});
+            break;
+        }
+
+        // cout << "META DATA PARSED: " << endl;
+
+        // for (auto const &x : metaDataMap)
+        // {
+        //     std::cout << x.first // string (key)
+        //               << ':'
+        //               << x.second // string's value
+        //               << std::endl;
+        // }
+
+        string data = getNext(LINE);
+        // cout << "DATA: " << data << endl;
+        this->bodyMap.insert(std::pair<string, string>{metaDataMap.find("name")->second, data});
+        line = getNext("--" + this->boundry + LINE);
+    }
+}
+
+void HttpServletRequest::parseMultiPartMetaData(string str, std::map<string, string> &map)
+{
+    // cout << "PARSING META DATA --|-- PARSING META DATA" << endl;
+    int n = str.size();
+    // declaring character array
+    char v[n + 1];
+
+    // copying the contents of the string to char array
+    strcpy(v, str.c_str());
+    int cursor = 0;
+
+    // Split content disposition and content type
+    string cd = getNext(v + cursor, n, LINE, &cursor);
+    string ct = getNext(v + cursor, n, BOUNDRY, &cursor);
+
+    // // Remove white space
+    trim(cd);
+    trim(ct);
+
+    // cout << "CONTENT DISP: " << cd << endl;
+    // cout << "CONTENT TYPE: " << ct << endl;
+
+    // Parse Content Disposition
+    int nCD = cd.length();
+    // declaring character array
+    char vCD[nCD + 1];
+    // copying the contents of the string to char array
+    strcpy(vCD, cd.c_str());
+    int cursorCD = 0;
+
+    // Move cursor to first key value pair
+    getNext(vCD + cursorCD, nCD, "; ", &cursorCD);
+
+    // parse line
+    while (cursorCD < nCD)
+    {
+        // Get key value
+        string key = getNext(vCD + cursorCD, nCD, "=", &cursorCD);
+        string value = getNext(vCD + cursorCD, nCD, "; ", &cursorCD);
+
+        // Remove quotes
+        trim(value, '\"');
+
+        // cout << "KEY: " << key << " VALUE: " << value << endl;
+        map.insert(std::pair<string, string>(key, value));
+    }
+
+    if (ct != "")
+    {
+        // cout << "CONTENT TYPE: " << ct << endl;
+        // Parse Content Disposition
+        int nCT = ct.length();
+        // declaring character array
+        char vCT[nCT + 1];
+        // copying the contents of the string to char array
+        strcpy(vCT, ct.c_str());
+        int cursorCT = 0;
+        // cout << "BEOFRE REMOVING CONTENT_TYPE: " << (vCT + cursorCT) << endl;
+
+        getNext(vCT + cursorCT, nCT, ": ", &cursorCT);
+
+        // cout << "AFTER REMOVING CONTENT_TYPE: " << (vCT + cursorCT) << endl;
+        // parse line
+        string value = getNext(vCT + cursorCT, nCT, "", &cursorCT);
+        // cout << "CONTENT TYPE VALUE: " << value << endl;
+        map.insert(std::pair<string, string>("Content-Type", value));
+    }
+};
