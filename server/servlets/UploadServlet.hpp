@@ -9,6 +9,9 @@
 
 
 class UploadServlet : public HttpServlet {
+    string getSortedListingJSON(String directoryPath);
+    string getSortedListingHTML(String directoryPath)
+    list<String> getSortedFiles(String directoryPath);
 public:
     void doGet(HttpServletRequest, HttpServletResponse) override;
     void doPost(HttpServletRequest, HttpServletResponse) override;
