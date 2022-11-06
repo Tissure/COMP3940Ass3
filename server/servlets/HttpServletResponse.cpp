@@ -8,21 +8,24 @@
 
 string HttpServletResponse::VERSION = "HTTP/1.1";
 
-HttpServletResponse::HttpServletResponse() : status("200"), statusPhrase("OK") {
+HttpServletResponse::HttpServletResponse() : status("200"), statusPhrase("OK")
+{
     bodyStr = new string;
 }
 
-HttpServletResponse::~HttpServletResponse() {
+HttpServletResponse::~HttpServletResponse()
+{
     delete bodyStr;
 }
 
-void HttpServletResponse::buildResponse() {
+void HttpServletResponse::buildResponse()
+{
     // build the response line
-    responseStr.append(VERSION).append(" ").append(status).append(" ").append(statusPhrase)
-        .append("\r\n");
+    responseStr.append(VERSION).append(" ").append(status).append(" ").append(statusPhrase).append("\r\n");
 
     // build the response headers
-    for (pair<string, string> header : headers) {
+    for (pair<string, string> header : headers)
+    {
         responseStr.append(header.first).append(": ").append(header.second).append("\r\n");
     }
 
@@ -33,7 +36,8 @@ void HttpServletResponse::buildResponse() {
     responseStr.append(*bodyStr);
 }
 
-string HttpServletResponse::getResponse() {
+string HttpServletResponse::getResponse()
+{
     buildResponse();
     return responseStr;
 }

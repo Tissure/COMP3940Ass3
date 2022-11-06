@@ -5,10 +5,10 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(servlets/Http)
 
-add_executable(Server servlets/Http/HttpServletResponse.hpp
-        servlets/Http/HttpServletResponse.cpp
-        servlets/Http/HttpServletRequest.hpp
-        servlets/Http/HttpServletRequest.cpp
+add_executable(Server servlets/HttpServletResponse.hpp
+        servlets/HttpServletResponse.cpp
+        servlets/HttpServletRequest.hpp
+        servlets/HttpServletRequest.cpp
 
         servlets/UploadServlet.cpp
         servlets/UploadServlet.hpp
@@ -26,5 +26,5 @@ add_executable(Server servlets/Http/HttpServletResponse.hpp
         threads/SimpleThread.cpp
         threads/Thread.h
         threads/Thread.cpp
-
+        
         )

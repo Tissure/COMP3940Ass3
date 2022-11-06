@@ -1,0 +1,4 @@
+/app/extra/clion/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/app/extra/clion/bin/ninja/linux/ninja -G Ninja -S "/home/user/Desktop/COMP 3940/COMP3940Ass3/server" -B "/home/user/Desktop/COMP 3940/COMP3940Ass3/server/cmake-build-debug"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/user/Desktop/COMP 3940/COMP3940Ass3/server/cmake-build-debug

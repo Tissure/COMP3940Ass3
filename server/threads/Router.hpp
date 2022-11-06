@@ -5,10 +5,16 @@
 
 #include "Thread.h"
 #include "../sockets/Socket.h"
+#include "../servlets/HttpServletRequest.hpp"
+#include "../servlets/HttpServletResponse.hpp"
 
-class Router : public Thread{
+class Router : public Thread
+{
 private:
-    Socket * sock;
+    HttpServletRequest request;
+    HttpServletResponse response;
+    Socket *sock;
+
 public:
     Router(Socket *sock);
     void run() override;
