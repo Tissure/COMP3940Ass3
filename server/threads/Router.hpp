@@ -3,9 +3,6 @@
 //
 #pragma once
 
-#ifndef C_WRAPPERS_ROUTER_HPP
-#define C_WRAPPERS_ROUTER_HPP
-
 #include "Thread.h"
 #include "../sockets/Socket.h"
 #include "../servlets/HttpServletRequest.hpp"
@@ -23,5 +20,3 @@ public:
     void run() override;
     ~Router();
 };
-
-#endif // C_WRAPPERS_ROUTER_HPP

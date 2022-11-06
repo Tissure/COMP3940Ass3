@@ -2,11 +2,10 @@ cmake_minimum_required(VERSION 3.13)
 project(Http)
 
 set(CMAKE_CXX_STANDARD 14)
-SET(CMAKE_CXX_FLAGS -pthread)
 
 include_directories(servlets/Http)
 
-add_executable(server servlets/HttpServletResponse.hpp
+add_executable(Server servlets/HttpServletResponse.hpp
         servlets/HttpServletResponse.cpp
         servlets/HttpServletRequest.hpp
         servlets/HttpServletRequest.cpp
@@ -14,6 +13,7 @@ add_executable(server servlets/HttpServletResponse.hpp
         servlets/UploadServlet.cpp
         servlets/UploadServlet.hpp
 
+        main.cpp
 
         sockets/ServerSocket.h
         sockets/ServerSocket.cpp
@@ -26,6 +26,5 @@ add_executable(server servlets/HttpServletResponse.hpp
         threads/SimpleThread.cpp
         threads/Thread.h
         threads/Thread.cpp
-
-        main.cpp
+        
         )

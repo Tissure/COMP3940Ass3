@@ -10,7 +10,7 @@
 class UploadServlet : public HttpServlet
 {
 public:
-    void doGet(HttpServletRequest, HttpServletResponse) override;
+    void doGet(HttpServletRequest &, HttpServletResponse &) override;
     void doPost(HttpServletRequest, HttpServletResponse) override;
 };
 

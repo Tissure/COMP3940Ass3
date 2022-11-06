@@ -3,7 +3,6 @@
 //
 
 #include "Router.hpp"
-#include <stdio.h>
 #include <unistd.h>
 
 #include "../servlets/UploadServlet.hpp"
@@ -12,6 +11,8 @@ Router::Router(Socket *sock) : Thread(this)
 {
     request.setSocket(sock);
     request.parse();
+
+    // All input from socket is read at this point.
     this->sock = sock;
 }
 
@@ -30,10 +31,14 @@ void Router::run()
         break;
     default:;
     }
-    // sock->sendResponse(response.getResponse());
+
+    string res = response.getResponse();
+    char responseCharArray[res.length()];
+    strncpy(responseCharArray, res.c_str(), res.length());
+    sock->sendResponse(responseCharArray);
 }
 
 Router::~Router()
 {
-    // delete sock;
+    delete sock;
 }
