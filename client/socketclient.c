@@ -27,7 +27,7 @@ int main()
     hp = gethostbyname("localhost");
     bcopy((char *)hp->h_addr, (char *)&server.sin_addr, hp->h_length);
     server.sin_family = AF_INET;
-    server.sin_port = 8888;
+    server.sin_port = htons(8888);
 
     if (connect(sock, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
@@ -37,10 +37,10 @@ int main()
     strcpy(buf, "POST / HTTP/1.1\r\n"
                 "Host: localhost:8000\r\n"
                 "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:29.0) Gecko/20100101 Firefox/29.0\r\n"
-                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n"
+                "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,/;q=0.8\r\n"
                 "Accept-Language: en-US,en;q=0.5\r\n"
                 "Accept-Encoding: gzip, deflate\r\n"
-                "Cookie: __atuvc=34%7C7; permanent=0; _gitlab_session=226ad8a0be43681acf38c2fab9497240; __profilin=p%3Dt; request_method=GET\r\n"
+                "Cookie: atuvc=34%7C7; permanent=0; _gitlab_session=226ad8a0be43681acf38c2fab9497240; profilin=p%3Dt; request_method=GET\r\n"
                 "Connection: keep-alive\r\n"
                 "Content-Type: multipart/form-data; boundary=---------------------------9051914041544843365972754266\r\n"
                 "Content-Length: 554\r\n\r\n"

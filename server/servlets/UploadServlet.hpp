@@ -11,7 +11,7 @@ class UploadServlet : public HttpServlet
 {
 public:
     void doGet(HttpServletRequest &, HttpServletResponse &) override;
-    void doPost(HttpServletRequest, HttpServletResponse) override;
+    void doPost(HttpServletRequest &, HttpServletResponse &) override;
 };
 
 #endif // C_WRAPPERS_UPLOADSERVLET_HPP

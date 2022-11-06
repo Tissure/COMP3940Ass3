@@ -8,8 +8,9 @@
 
 using namespace std;
 
-void UploadServlet::doGet(HttpServletRequest& req, HttpServletResponse& res) {
-    string* writer = res.getWriter();
+void UploadServlet::doGet(HttpServletRequest &req, HttpServletResponse &res)
+{
+    string *writer = res.getWriter();
     res.setContentType("text/html");
 
     writer->append("<!DOCTYPE html>\r\n");
@@ -34,6 +35,6 @@ void UploadServlet::doGet(HttpServletRequest& req, HttpServletResponse& res) {
     res.setContentLength(writer->size());
 }
 
-void UploadServlet::doPost(HttpServletRequest, HttpServletResponse) {
-
+void UploadServlet::doPost(HttpServletRequest &, HttpServletResponse &)
+{
 }
