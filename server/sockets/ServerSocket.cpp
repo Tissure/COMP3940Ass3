@@ -16,7 +16,7 @@ ServerSocket::ServerSocket(int port)
   server.sin_family = AF_INET;
   server.sin_addr.s_addr = INADDR_ANY;
   server.sin_port = htons(8888);
-  
+
   if (bind (sock, (struct sockaddr *)&server, sizeof server) < 0) {
     perror ("binding stream socket");
   }

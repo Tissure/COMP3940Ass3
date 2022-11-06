@@ -31,6 +31,9 @@ void Router::run(){
             case HttpServletRequest::POST:
                 endPoint.doPost(httpRequest, httpResponse);
                 break;
+            default:
+                endPoint.doGet(httpRequest, httpResponse);
+                break;
         }
 
         string res = httpResponse.getResponse();
