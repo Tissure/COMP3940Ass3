@@ -31,12 +31,15 @@ void Socket::sendResponse(char *res)
   if ((rval = write(sock, res, strlen(res))) < 0)
   {
     perror("writing socket");
-    *res = -1;
+  }
+  else
+  {
+    printf("%s\n", res);
   }
 
-  printf("%s\n", res);
   return;
 }
+
 Socket::~Socket() {}
 
 /**
