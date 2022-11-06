@@ -129,5 +129,5 @@ int main()
  * PUG!!
  *
  * Also my internet is out still, so i need to go to my freinds house tonight and
- * push all the code.
+ * push all the code. I might be drunk by the time i get there :)
  */

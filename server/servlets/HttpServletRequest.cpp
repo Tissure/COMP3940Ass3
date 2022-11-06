@@ -330,8 +330,8 @@ void HttpServletRequest::parseMultiPart()
 
     // This what i got to do.
     // I need to read the socket line by line
-    // if i see that an image is present
-    // Im going to read it directly to a new file
+    // if i see an image is present, im going to  to read it directly
+    // to a new file
 
     // Removes first boundry
     string line = getNext("--" + this->boundry + LINE);
@@ -344,9 +344,9 @@ void HttpServletRequest::parseMultiPart()
 
         if (metaDataMap.count("filename") > 0)
         {
+            this->bodyMap.insert(std::pair<string, string>{"filename", metaDataMap.find("filename")->second});
             // stream socket dirrectly into file
             // Lets save this for another time.
-            this->bodyMap.insert(std::pair<string, string>{"filename", metaDataMap.find("filename")->second});
             break;
         }
 
