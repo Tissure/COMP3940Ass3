@@ -1,3 +1,7 @@
 /server/server
 /server/images
 /client/client
+cmake-build-debug
+.editorconfig
+.vscode
+/v
