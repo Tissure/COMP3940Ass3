@@ -8,3 +8,5 @@
 /server/server.exe
 /client/client.exe
 /server/server.exe.stackdump
+
+/server/cmake-build-debug

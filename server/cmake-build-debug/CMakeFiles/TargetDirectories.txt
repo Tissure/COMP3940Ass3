@@ -1,3 +1,0 @@
-C:/cygwin64/home/Clayton/COMP3940Ass3/server/cmake-build-debug/CMakeFiles/Server.dir
-C:/cygwin64/home/Clayton/COMP3940Ass3/server/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/cygwin64/home/Clayton/COMP3940Ass3/server/cmake-build-debug/CMakeFiles/rebuild_cache.dir

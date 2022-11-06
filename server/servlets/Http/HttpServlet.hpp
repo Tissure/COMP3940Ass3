@@ -8,6 +8,6 @@
 
 class HttpServlet {
 public:
-    virtual void doGet(HttpServletRequest, HttpServletResponse) = 0;
+    virtual void doGet(HttpServletRequest&, HttpServletResponse&) = 0;
     virtual void doPost(HttpServletRequest, HttpServletResponse) = 0;
 };

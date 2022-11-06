@@ -3,7 +3,6 @@
 //
 
 #include "Router.hpp"
-#include <stdio.h>
 #include <unistd.h>
 
 #include "../servlets/Http/HttpServletRequest.hpp"
@@ -32,11 +31,12 @@ void Router::run(){
             case HttpServletRequest::POST:
                 endPoint.doPost(httpRequest, httpResponse);
                 break;
-            default:
-                endPoint.doGet(httpRequest, httpResponse);
         }
-        sock->sendResponse(httpResponse.getResponse());
-        //
+
+        string res = httpResponse.getResponse();
+        char responseCharArray[res.length()];
+        strncpy(responseCharArray, res.c_str(), res.length());
+        sock->sendResponse(responseCharArray);
 }
 
 Router::~Router() {

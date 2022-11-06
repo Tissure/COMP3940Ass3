@@ -47,10 +47,6 @@ public:
         return bodyStr;
     }
 
-    char* getResponse() {
-        buildResponse();
-        char stuff[responseStr.length() + 1];
-        return strcpy(stuff, responseStr.c_str());
-    }
+    string getResponse();
 
 };

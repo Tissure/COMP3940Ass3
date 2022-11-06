@@ -32,3 +32,8 @@ void HttpServletResponse::buildResponse() {
     // append the body
     responseStr.append(*bodyStr);
 }
+
+string HttpServletResponse::getResponse() {
+    buildResponse();
+    return responseStr;
+}

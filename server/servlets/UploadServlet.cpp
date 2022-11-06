@@ -4,7 +4,11 @@
 
 #include "UploadServlet.hpp"
 
-void UploadServlet::doGet(HttpServletRequest req, HttpServletResponse res) {
+#include <iostream>
+
+using namespace std;
+
+void UploadServlet::doGet(HttpServletRequest& req, HttpServletResponse& res) {
     string* writer = res.getWriter();
     res.setContentType("text/html");
 
