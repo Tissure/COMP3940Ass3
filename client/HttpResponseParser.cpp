@@ -2,7 +2,7 @@
 // Created by Admin on 2022-10-31.
 //
 
-#include "HttpReqponseParser.hpp"
+#include "HttpResponseParser.hpp"
 
 /**
  * Split raw request into 3 parts.
@@ -10,15 +10,15 @@
  *
  * Then call helper methods to parse each.
  */
-void HttpRequestParser::parseRequest()
+void HttpResponseParser::parseResponse()
 {
     parseHead();
     parseHeaders();
     parseBody();
-    cout << *this << endl;
+//    cout << *this << endl;
 }
 
-void HttpRequestParser::parseHead()
+void HttpResponseParser::parseHead()
 {
     string head = getNext(LINE);
     int type = 0;
@@ -47,7 +47,7 @@ void HttpRequestParser::parseHead()
     this->version = value;
 };
 
-void HttpRequestParser::parseHeaders()
+void HttpResponseParser::parseHeaders()
 {
     string h = getNext(BOUNDRY);
 
@@ -76,7 +76,7 @@ void HttpRequestParser::parseHeaders()
     }
 };
 
-void HttpRequestParser::parseBody()
+void HttpResponseParser::parseBody()
 {
     // Becuase we only care about multipart/form-data we will check
     // for it. If we dont see it, im gonna write the body to a
@@ -87,12 +87,16 @@ void HttpRequestParser::parseBody()
         return;
     }
 
-    // std::vector<char> body;
-    // this->socket->dump(body);
-    // this->body = body;
+     std::vector<char> bodyBuilder;
+    while (*(res) > 0)
+    {
+        bodyBuilder.push_back(*res);
+        res++;
+    }
+     this->body = bodyBuilder;
 };
 
-HttpRequestParser::Method HttpRequestParser::stringToMethod(string method)
+HttpResponseParser::Method HttpResponseParser::stringToMethod(string method)
 {
     for (auto &c : method)
         c = toupper(c);
@@ -106,7 +110,7 @@ HttpRequestParser::Method HttpRequestParser::stringToMethod(string method)
     return Method::GET;
 }
 
-string HttpServleHttpRequestParsertRequest::getNext(string pattern)
+string HttpResponseParser::getNext(string pattern)
 {
     size_t patternLength = pattern.size();
 
@@ -114,9 +118,10 @@ string HttpServleHttpRequestParsertRequest::getNext(string pattern)
     char *character;
 
     // Read socket into string.
-    while (!isMatch(result, pattern) && *(character = socket->getNext()) != EOF)
+    while (!isMatch(result, pattern) && *(character = res) != EOF)
     {
         result += *character;
+        res++;
     }
 
     // Remove pattern from string
@@ -125,7 +130,7 @@ string HttpServleHttpRequestParsertRequest::getNext(string pattern)
     return result;
 }
 
-string HttpServletRequest::getNext(char *str, int size, string pattern, int *cursor)
+string HttpResponseParser::getNext(char *str, int size, string pattern, int *cursor)
 {
     string result;
     if (size < pattern.size() || *cursor >= size)
@@ -154,7 +159,7 @@ string HttpServletRequest::getNext(char *str, int size, string pattern, int *cur
     return result;
 }
 
-bool HttpServletRequest::isMatch(string str, string pattern)
+bool HttpResponseParser::isMatch(string str, string pattern)
 {
     if (pattern.size() > str.size() || pattern == "")
         return false;
@@ -168,7 +173,7 @@ bool HttpServletRequest::isMatch(string str, string pattern)
     return true;
 }
 
-void HttpServletRequest::trim(string &str, char pattern)
+void HttpResponseParser::trim(string &str, char pattern)
 {
     int left = 0;
     int right = str.size() - 1;
@@ -187,7 +192,7 @@ void HttpServletRequest::trim(string &str, char pattern)
     str = temp;
 }
 
-void HttpServletRequest::trim(string &str)
+void HttpResponseParser::trim(string &str)
 {
     int left = 0;
     int right = str.size() - 1;
@@ -206,7 +211,7 @@ void HttpServletRequest::trim(string &str)
     str = temp;
 }
 
-bool HttpServletRequest::hasPattern(string str, string pattern)
+bool HttpResponseParser::hasPattern(string str, string pattern)
 {
     for (int i = 0; i < str.size(); i++)
     {
@@ -229,7 +234,7 @@ bool HttpServletRequest::hasPattern(string str, string pattern)
 /**
  * Returns true if key is an edge case.
  */
-bool HttpServletRequest::headerEdgeCases(string key, string value)
+bool HttpResponseParser::headerEdgeCases(string key, string value)
 {
     // cout << "EDGE CASES: " << key << " --54545|-- " << value << endl;
     // cout << "IS EDGE CASE " << (key == CT) << " --54545|-- " << hasPattern(value, CT_MULTI_PART_FORM_DATA) << endl;
@@ -245,7 +250,7 @@ bool HttpServletRequest::headerEdgeCases(string key, string value)
 /**
  * Appends key, value to headerMap
  */
-void HttpServletRequest::appendHeader(string key, string value)
+void HttpResponseParser::appendHeader(string key, string value)
 {
     // Its lie to call this headerEdgeCases, becuase we
     // are only checking for multipart/form-data
@@ -277,14 +282,14 @@ void HttpServletRequest::appendHeader(string key, string value)
     this->headersMap.insert(pair<string, string>(key, value));
 };
 
-ostream &operator<<(ostream &os, const HttpServletRequest &req)
+ostream &operator<<(ostream &os, const HttpResponseParser &res)
 {
 
     os << "HEAD: \n"
-       << req.method << " " << req.url << " " << req.version << endl;
+       << res.method << " " << res.url << " " << res.version << endl;
 
     os << "\nHEADERS: \n";
-    for (auto const &x : req.headersMap)
+    for (auto const &x : res.headersMap)
     {
         os << x.first // string (key)
            << ':'
@@ -292,14 +297,14 @@ ostream &operator<<(ostream &os, const HttpServletRequest &req)
            << endl; // string's value
     }
 
-    os << "Boundry: " << req.boundry << endl;
+    os << "Boundry: " << res.boundry << endl;
 
     os << "\nBODY: \n";
-    if (req.headersMap.count(CT) > 0 && req.headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
+    if (res.headersMap.count(CT) > 0 && res.headersMap.find(CT)->second == CT_MULTI_PART_FORM_DATA)
     {
         // Print body map
 
-        for (auto const &x : req.bodyMap)
+        for (auto const &x : res.bodyMap)
         {
             os << x.first // string (key)
                << ':'
@@ -311,8 +316,8 @@ ostream &operator<<(ostream &os, const HttpServletRequest &req)
 
     // For some reason these had to be constants. Can anyone tell me
     // why?
-    std::vector<char>::const_iterator it = req.body.begin();
-    std::vector<char>::const_iterator end = req.body.end();
+    std::vector<char>::const_iterator it = res.body.begin();
+    std::vector<char>::const_iterator end = res.body.end();
 
     int pos = 0;
     while ((it + pos) < end)
@@ -323,7 +328,7 @@ ostream &operator<<(ostream &os, const HttpServletRequest &req)
     return os;
 }
 
-void HttpServletRequest::parseMultiPart()
+void HttpResponseParser::parseMultiPart()
 {
     // JUST TO MAKE SURE MY THREAD IS ARRIVING
     // cout << "PARSING MULTI PART --|-- PARSING MULTI PART" << endl;
@@ -367,7 +372,7 @@ void HttpServletRequest::parseMultiPart()
     }
 }
 
-void HttpServletRequest::parseMultiPartMetaData(string str, std::map<string, string> &map)
+void HttpResponseParser::parseMultiPartMetaData(string str, std::map<string, string> &map)
 {
     // cout << "PARSING META DATA --|-- PARSING META DATA" << endl;
     int n = str.size();

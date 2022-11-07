@@ -27,7 +27,7 @@
 
 using namespace std;
 
-class HttpRequestParser
+class HttpResponseParser
 {
 public:
     enum Method
@@ -37,27 +37,28 @@ public:
         DELETE
     };
 
-    HttpRequestParser(){};
+    HttpResponseParser(){};
 
     /**
      * Parses response.
      */
-    HttpRequestParser(Socket *socket) : socket(socket){};
+    HttpResponseParser(char * res) : res(res){};
 
-    HttpRequestParser::Method getMethod() { return this->method; }
-    HttpRequestParser::Method stringToMethod(string method);
+    HttpResponseParser::Method getMethod() { return this->method; }
+    HttpResponseParser::Method stringToMethod(string method);
 
     /**
      * Access map and returns copy
      * @return
      */
     char *getAttribute();
-    Socket *getSocket() { return socket; };
-    void setSocket(Socket *socket) { this->socket = socket; }
-    void parse() { this->parseRequest(); }
+    char *getSocket() { return res; };
+    void setSocket(char *res) { this->res = res; }
+    vector<char> getBody() { return this->body;}
+    void parse() { this->parseResponse(); }
 
 private:
-    Socket *socket;
+    char *res;
 
     // Head
     Method method;
@@ -82,7 +83,7 @@ private:
      * @param request
      * @return char *
      */
-    void parseRequest();
+    void parseResponse();
     void parseHead();
     void parseHeaders();
     void parseBody();
@@ -130,7 +131,7 @@ private:
     /**
      * F**g overloaded operator
      */
-    friend ostream &operator<<(ostream &os, const HttpRequestParser &request);
+    friend ostream &operator<<(ostream &os, const HttpResponseParser &response);
 };
 
 #endif // C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

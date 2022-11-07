@@ -37,8 +37,8 @@ add_executable(client client/FileUploadMenu.hpp
         client/HttpRequestBuilder.hpp
         client/HttpRequestBuilder.cpp
 
-        client/HttpResponseBuilder.hpp
-        client/HttpResponseBuilder.cpp
+        client/HttpResponseParser.hpp
+        client/HttpResponseParser.cpp
 
         client/socketclient.cpp
         )
