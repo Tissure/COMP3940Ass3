@@ -2,7 +2,7 @@
 // Created by Admin on 2022-10-31.
 //
 
-#include "HttpRequestParser.hpp"
+#include "HttpReqponseParser.hpp"
 
 /**
  * Split raw request into 3 parts.
@@ -10,7 +10,7 @@
  *
  * Then call helper methods to parse each.
  */
-void HttpServletRequest::parseRequest()
+void HttpRequestParser::parseRequest()
 {
     parseHead();
     parseHeaders();
@@ -18,7 +18,7 @@ void HttpServletRequest::parseRequest()
     cout << *this << endl;
 }
 
-void HttpServletRequest::parseHead()
+void HttpRequestParser::parseHead()
 {
     string head = getNext(LINE);
     int type = 0;
@@ -47,7 +47,7 @@ void HttpServletRequest::parseHead()
     this->version = value;
 };
 
-void HttpServletRequest::parseHeaders()
+void HttpRequestParser::parseHeaders()
 {
     string h = getNext(BOUNDRY);
 
@@ -76,7 +76,7 @@ void HttpServletRequest::parseHeaders()
     }
 };
 
-void HttpServletRequest::parseBody()
+void HttpRequestParser::parseBody()
 {
     // Becuase we only care about multipart/form-data we will check
     // for it. If we dont see it, im gonna write the body to a
@@ -92,7 +92,7 @@ void HttpServletRequest::parseBody()
     // this->body = body;
 };
 
-HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
+HttpRequestParser::Method HttpRequestParser::stringToMethod(string method)
 {
     for (auto &c : method)
         c = toupper(c);
@@ -106,7 +106,7 @@ HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
     return Method::GET;
 }
 
-string HttpServletRequest::getNext(string pattern)
+string HttpServleHttpRequestParsertRequest::getNext(string pattern)
 {
     size_t patternLength = pattern.size();
 

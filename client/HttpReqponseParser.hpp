@@ -27,7 +27,7 @@
 
 using namespace std;
 
-class HttpServletRequest
+class HttpRequestParser
 {
 public:
     enum Method
@@ -37,15 +37,15 @@ public:
         DELETE
     };
 
-    HttpServletRequest(){};
+    HttpRequestParser(){};
 
     /**
      * Parses response.
      */
-    HttpServletRequest(Socket *socket) : socket(socket){};
+    HttpRequestParser(Socket *socket) : socket(socket){};
 
-    HttpServletRequest::Method getMethod() { return this->method; }
-    HttpServletRequest::Method stringToMethod(string method);
+    HttpRequestParser::Method getMethod() { return this->method; }
+    HttpRequestParser::Method stringToMethod(string method);
 
     /**
      * Access map and returns copy
@@ -130,7 +130,7 @@ private:
     /**
      * F**g overloaded operator
      */
-    friend ostream &operator<<(ostream &os, const HttpServletRequest &request);
+    friend ostream &operator<<(ostream &os, const HttpRequestParser &request);
 };
 
 #endif // C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

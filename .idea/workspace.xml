@@ -19,10 +19,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb56a1e-bc4c-4d81-96a5-958046797d4e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/client/HttpServletRequest.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/HttpServletRequest.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/HttpRequestParser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpRequestParser.hpp" afterDir="false" />
     </list>
-    <list id="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" name="Changes by Jason" comment="" />
+    <list id="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" name="Changes by Jason" comment="">
+      <change beforePath="$PROJECT_DIR$/client/HttpRequestParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpRequestParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/HttpRequestParser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpRequestParser.hpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -34,6 +38,17 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/client/HttpRequestParser.hpp">
+      <ranges>
+        <range start1="29" end1="30" start2="29" end2="30" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
+        <range start1="39" end1="40" start2="39" end2="40" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
+        <range start1="44" end1="45" start2="44" end2="45" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
+        <range start1="46" end1="48" start2="46" end2="48" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
+        <range start1="132" end1="133" start2="132" end2="133" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
+      </ranges>
+    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -60,6 +75,11 @@
     "last_opened_file_path": "/home/user/Desktop/COMP 3940/COMP3940Ass3/client"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/client" />
+    </key>
+  </component>
   <component name="RunManager" selected="CMake Application.client">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
@@ -89,7 +109,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1667851467263</updated>
-      <workItem from="1667851469430" duration="681000" />
+      <workItem from="1667851469430" duration="745000" />
     </task>
     <servers />
   </component>
