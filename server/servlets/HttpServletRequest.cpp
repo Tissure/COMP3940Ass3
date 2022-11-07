@@ -87,9 +87,9 @@ void HttpServletRequest::parseBody()
         return;
     }
 
-    std::vector<char> body;
-    this->socket->dump(body);
-    this->body = body;
+    // std::vector<char> body;
+    // this->socket->dump(body);
+    // this->body = body;
 };
 
 HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)

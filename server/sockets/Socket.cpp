@@ -4,6 +4,7 @@
 #include <resolv.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <iostream>
 
 Socket::Socket(int sock)
 {
@@ -51,7 +52,7 @@ void Socket::dump(std::vector<char> &result)
   int rval;
   char *buf;
 
-  while (*(buf = getNext()) != EOF)
+  while (*(buf = getNext()) > 0)
   {
     result.push_back(*buf);
   }
