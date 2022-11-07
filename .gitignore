@@ -2,6 +2,13 @@
 /server/images
 /client/client
 cmake-build-debug
+<<<<<<< HEAD
 .editorconfig
 .vscode
 /v
+=======
+/server/cmake-build-debug
+/client/cmake-build-debug
+client/client.exe
+server/server.exe
+>>>>>>> client
