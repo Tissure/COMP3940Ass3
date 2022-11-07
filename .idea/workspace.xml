@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CMakePresetLoader"><![CDATA[{
+  "useNewFormat": true
+}]]></component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated />
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2cb56a1e-bc4c-4d81-96a5-958046797d4e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/COMP3940Ass3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/c++wrappers.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/client.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/query/cache-v2" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/query/cmakeFiles-v1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/query/codemodel-v2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/query/toolchains-v1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/cache-v2-ade4f76d7855aa6954c2.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-bb0abf8fb66c090ded65.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-6f2897013e0e047e70d1.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/directory-.-Debug-f5ebdc15457944623624.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/index-2022-11-04T20-49-58-0846.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/target-server-Debug-ad2ebd9370e2982282b4.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-8ae3a32a9fc9b818bdf9.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.ninja_deps" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/.ninja_log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeCache.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CMakeCCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CMakeCXXCompiler.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_C.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CMakeDetermineCompilerABI_CXX.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CMakeSystem.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdC/CMakeCCompilerId.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdC/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdCXX/CMakeCXXCompilerId.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/3.23.2/CompilerIdCXX/a.out" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/CMakeOutput.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/servlets/HttpServletRequest.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/servlets/HttpServletResponse.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/servlets/UploadServlet.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/sockets/ServerSocket.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/sockets/Socket.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/threads/Router.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/threads/SimpleThread.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/Server.dir/threads/Thread.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/cmake.check_cache" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/main.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/servlets/HttpServletRequest.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/servlets/HttpServletResponse.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/servlets/UploadServlet.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/sockets/ServerSocket.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/sockets/Socket.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/threads/Router.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/threads/SimpleThread.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/CMakeFiles/server.dir/threads/Thread.cpp.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/build.ninja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/cmake_install.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/cmake-build-debug/server" beforeDir="false" />
+    </list>
+    <list id="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" name="Changes by Jason" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2022" />
+    <option name="minorVersion" value="2.4" />
+  </component>
+  <component name="ProjectId" id="2HEXy9BlxOCYnPUcPrGWxkvoSO9" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true"
+  }
+}]]></component>
+  <component name="RunManager" selected="CMake Application.client">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="client" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Http" TARGET_NAME="client" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Http" RUN_TARGET_NAME="client">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="server" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="Http" TARGET_NAME="server" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="Http" RUN_TARGET_NAME="server">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="CMake Application.client" />
+      <item itemvalue="CMake Application.server" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2cb56a1e-bc4c-4d81-96a5-958046797d4e" name="Changes" comment="" />
+      <created>1667851467263</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1667851467263</updated>
+      <workItem from="1667851469430" duration="344000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
