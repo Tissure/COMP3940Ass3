@@ -2,6 +2,7 @@
 // Created by Admin on 2022-10-31.
 //
 
+
 #include "HttpServletRequest.hpp"
 
 /**
@@ -14,7 +15,18 @@ void HttpServletRequest::parseRequest()
 {
     parseHead();
     parseHeaders();
-    parseBody();
+
+    if (this->method != 0) {
+        parseBody();
+    }
+
+//    char * character;
+//    int count = 0;
+//    while(count++ < 10000) {
+//        *(character = this->socket->getNext()) > 0;
+//        cout << *character;
+//    }
+
     cout << *this << endl;
 }
 
@@ -94,15 +106,12 @@ void HttpServletRequest::parseBody()
 
 HttpServletRequest::Method HttpServletRequest::stringToMethod(string method)
 {
-    for (auto &c : method)
-        c = toupper(c);
-
+    trim(method);
     if (method == "POST")
         return Method::POST;
 
     if (method == "DELETE")
         return Method::DELETE;
-
     return Method::GET;
 }
 
@@ -114,13 +123,23 @@ string HttpServletRequest::getNext(string pattern)
     char *character;
 
     // Read socket into string.
-    while (!isMatch(result, pattern) && *(character = socket->getNext()) != EOF)
+//    cout << "READ FROM SOCKET" << endl;
+    while (!isMatch(result, pattern) && !isMatch(result, "--\r\n") && *(character = socket->getNext()) != EOF)
     {
         result += *character;
+//        cout << "APPENDING: " << (int) *character << endl;
+//        if (result.size() > 2) {
+////            cout << "LAST ONE-TWO: " << (int) result[result.size() - 1] << " " << (int) result[result.size() - 2] << endl;
+////            cout << "APPENDING: " << result << endl;
+//        }
+
     }
+
+//    cout << "RESULT: " << result << endl;
 
     // Remove pattern from string
     result.resize(result.size() - pattern.size());
+//    cout << "RESULT + SUBTRACTION: " << result << endl;
 
     return result;
 }
@@ -280,7 +299,7 @@ void HttpServletRequest::appendHeader(string key, string value)
 ostream &operator<<(ostream &os, const HttpServletRequest &req)
 {
 
-    os << "HEAD: \n"
+    os << "\nHEAD: \n"
        << req.method << " " << req.url << " " << req.version << endl;
 
     os << "\nHEADERS: \n";
@@ -311,15 +330,15 @@ ostream &operator<<(ostream &os, const HttpServletRequest &req)
 
     // For some reason these had to be constants. Can anyone tell me
     // why?
-    std::vector<char>::const_iterator it = req.body.begin();
-    std::vector<char>::const_iterator end = req.body.end();
-
-    int pos = 0;
-    while ((it + pos) < end)
-    {
-        os << (char)*(it + pos++);
-    }
-
+//    std::vector<char>::const_iterator it = req.body.begin();
+//    std::vector<char>::const_iterator end = req.body.end();
+//
+//    int pos = 0;
+//    while ((it + pos) < end)
+//    {
+//        os << (char)*(it + pos++);
+//    }
+//
     return os;
 }
 
@@ -338,34 +357,45 @@ void HttpServletRequest::parseMultiPart()
 
     while (line == "")
     {
+
+        std::cout << "BEFORE METADATA --|-- BEFORE METADATA" << std::endl;
         string metaData = getNext(BOUNDRY);
+        std::cout << "METADATA --|-- = " << metaData << std::endl;
         std::map<string, string> metaDataMap;
         parseMultiPartMetaData(metaData, metaDataMap);
 
+        cout << "META DATA PARSED: " << endl;
+
+        for (auto const &x : metaDataMap)
+        {
+            std::cout << x.first // string (key)
+                      << ':'
+                      << x.second // string's value
+                      << std::endl;
+        }
+
         if (metaDataMap.count("filename") > 0)
         {
-            this->bodyMap.insert(std::pair<string, string>{"filename", metaDataMap.find("filename")->second});
-            // stream socket dirrectly into file
-            // Lets save this for another time.
+//            if (metaDataMap.find("Content-Type")->second == "image/png") {
+//                streamPNGToFile(metaDataMap.find("filename")->second);
+//                break;
+//            }
+            streamIntoFile(metaDataMap.find("filename")->second);
             break;
         }
 
-        // cout << "META DATA PARSED: " << endl;
 
-        // for (auto const &x : metaDataMap)
-        // {
-        //     std::cout << x.first // string (key)
-        //               << ':'
-        //               << x.second // string's value
-        //               << std::endl;
-        // }
 
         string data = getNext(LINE);
-        // cout << "DATA: " << data << endl;
+//         cout << "DATA: " << data << endl;
         this->bodyMap.insert(std::pair<string, string>{metaDataMap.find("name")->second, data});
         line = getNext("--" + this->boundry + LINE);
+        trim(line);
+//        cout << "NEXT LINE --|-- NEXT LINE" << endl << ("" == line) << endl;
     }
 }
+
+
 
 void HttpServletRequest::parseMultiPartMetaData(string str, std::map<string, string> &map)
 {
@@ -434,4 +464,45 @@ void HttpServletRequest::parseMultiPartMetaData(string str, std::map<string, str
         // cout << "CONTENT TYPE VALUE: " << value << endl;
         map.insert(std::pair<string, string>("Content-Type", value));
     }
+}
+
+void HttpServletRequest::streamIntoFile(string fileName) {
+
+    cout << "PARSING FILE --|-- PARSING FILE" << endl;
+    // Logic to into file.
+    ofstream file;
+    file.open(fileName);
+
+    // Create 2 char array;
+    char* buffer = new char[4];
+    buffer[0] = *socket->getNext();
+    buffer[1] = *socket->getNext();
+    buffer[2] = *socket->getNext();
+    buffer[3] = *socket->getNext();
+
+
+    while(!(buffer[0] == '\r' && buffer[1] == '\n' && buffer[2] == '-' && buffer[3] == '-')) {
+        file << buffer[0];
+        cout << hex << (int)buffer[0] << " " << (int)buffer[1] << " " << (int)buffer[2] << " " << (int)buffer[3] << endl;
+
+
+
+        buffer[0] = buffer[1];
+        buffer[1] = buffer[2];
+        buffer[2] = buffer[3];
+        buffer[3] = *socket->getNext();
+    }
+//    getNext(boundry);
+
+//    cout << (buffer[0] == '\r') << " ";
+//    cout << (buffer[1] == '\n') << " ";
+
+
+    delete buffer;
 };
+
+void HttpServletRequest::streamPNGToFile(string fileName) {
+    cout << "PARSING PNG --|-- PARSING PNG" << endl;
+    cout << "WE DONT KNOW HOW TO PARSE PNGS --|-- WE DONT KNOW HOW TO PARSE PNGS" << endl;
+};
+

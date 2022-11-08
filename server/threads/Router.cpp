@@ -23,10 +23,10 @@ void Router::run()
 
     switch (request.getMethod())
     {
-    case HttpServletRequest::GET:
+        case 0:
         endPoint.doGet(request, response);
         break;
-    case HttpServletRequest::POST:
+        case 1:
         endPoint.doPost(request, response);
         break;
     default:;

@@ -22,6 +22,8 @@
 #include <cstring>
 #include <vector>
 #include <algorithm>
+#include <sstream>
+#include <fstream>
 
 #include "../sockets/Socket.h"
 
@@ -55,6 +57,14 @@ public:
     Socket *getSocket() { return socket; };
     void setSocket(Socket *socket) { this->socket = socket; }
     void parse() { this->parseRequest(); }
+
+    string getParameter(string key) {
+        return bodyMap.find(key)->second;
+    }
+
+    string getHeader(string key){
+        return headersMap.find(key)->second;
+    }
 
 private:
     Socket *socket;
@@ -123,14 +133,15 @@ private:
     void trim(string &str, char pattern);
     void trim(string &str);
 
-    void parseContentDisposition(string line);
-
     void streamIntoFile(string fileName);
+    void streamPNGToFile(string fileName);
 
     /**
      * F**g overloaded operator
      */
     friend ostream &operator<<(ostream &os, const HttpServletRequest &request);
+
+
 };
 
 #endif // C_WRAPPERS_HTTPSERVLETRESQUEST_HPP

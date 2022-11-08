@@ -8,7 +8,6 @@
 using namespace std;
 
 void* startMethodInThread(void *arg){
-    cout << "cum"<< endl;
 	if (arg == NULL) {
         cout <<"no args" << endl;
         return 0;

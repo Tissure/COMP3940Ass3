@@ -31,7 +31,7 @@ int main() {
         perror("connecting");
     }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     strcpy(buf, "POST / HTTP/1.1\r\n"
                 "Host: localhost:8000\r\n"
                 "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:29.0) Gecko/20100101 Firefox/29.0\r\n"
@@ -50,14 +50,14 @@ int main() {
                 "Content-Type: text/plain\r\n\r\n"
                 "Content of a.txt.\r\n"
                 "-----------------------------9051914041544843365972754266--");
-=======
-    strcpy(buf, "GET /somedir/page.html HTTP/1.1\r\n"
-                "HOST:www.sameschool.edu\r\n"
-                "Connection:close\r\n"
-                "User-agent:Mozzilla/4.0\r\n"
-                "Accept Language: fr\r\n\r\n"
-    );
->>>>>>> e7231b170336201e5c47f3bb09623ae69bbdeb89
+//=======
+//    strcpy(buf, "GET /somedir/page.html HTTP/1.1\r\n"
+//                "HOST:www.sameschool.edu\r\n"
+//                "Connection:close\r\n"
+//                "User-agent:Mozzilla/4.0\r\n"
+//                "Accept Language: fr\r\n\r\n"
+//    );
+//>>>>>>> e7231b170336201e5c47f3bb09623ae69bbdeb89
 
     if ((rval = write(sock, buf, 1024)) < 0) {
         perror("writing socket");
