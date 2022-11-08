@@ -19,15 +19,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cb56a1e-bc4c-4d81-96a5-958046797d4e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/FileUploadMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/FileUploadMenu.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/HttpReqponseParser.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpResponseParser.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/HttpResponseParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpResponseParser.cpp" afterDir="false" />
-    </list>
-    <list id="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" name="Changes by Jason" comment="">
-      <change beforePath="$PROJECT_DIR$/client/FileUploadMenu.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/FileUploadMenu.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/HttpResponseParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/client/HttpResponseParser.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,47 +33,6 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="LineStatusTrackerManager">
-    <file path="$PROJECT_DIR$/client/FileUploadMenu.cpp">
-      <ranges>
-        <range start1="6" end1="6" start2="6" end2="7" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="9" end1="9" start2="10" end2="11" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="51" end1="54" start2="53" end2="60" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="65" end1="65" start2="71" end2="73" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-      </ranges>
-    </file>
-    <file path="$PROJECT_DIR$/client/HttpResponseParser.cpp">
-      <ranges>
-        <range start1="4" end1="5" start2="4" end2="5" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="12" end1="13" start2="12" end2="13" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="17" end1="18" start2="17" end2="18" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="20" end1="21" start2="20" end2="21" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="49" end1="50" start2="49" end2="50" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="78" end1="79" start2="78" end2="79" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="89" end1="92" start2="89" end2="96" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="94" end1="95" start2="98" end2="99" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="108" end1="109" start2="112" end2="113" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="116" end1="117" start2="120" end2="121" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="119" end1="119" start2="123" end2="124" changelist="2cb56a1e-bc4c-4d81-96a5-958046797d4e" />
-        <range start1="127" end1="128" start2="132" end2="133" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="156" end1="157" start2="161" end2="162" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="170" end1="171" start2="175" end2="176" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="189" end1="190" start2="194" end2="195" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="208" end1="209" start2="213" end2="214" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="231" end1="232" start2="236" end2="237" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="247" end1="248" start2="252" end2="253" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="279" end1="280" start2="284" end2="285" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="283" end1="284" start2="288" end2="289" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="286" end1="287" start2="291" end2="292" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="294" end1="295" start2="299" end2="300" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="297" end1="298" start2="302" end2="303" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="301" end1="302" start2="306" end2="307" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="313" end1="315" start2="318" end2="320" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="325" end1="326" start2="330" end2="331" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-        <range start1="369" end1="370" start2="374" end2="375" changelist="4e5cba14-72ce-4f79-a09d-40ba4dc72ca7" />
-      </ranges>
-    </file>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -142,7 +94,7 @@
       <option name="presentableId" value="Default" />
       <updated>1667851467263</updated>
       <workItem from="1667851469430" duration="3125000" />
-      <workItem from="1667854847313" duration="393000" />
+      <workItem from="1667854847313" duration="2653000" />
     </task>
     <servers />
   </component>
