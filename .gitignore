@@ -1,0 +1,12 @@
+/server/server
+/server/images
+/client/client
+cmake-build-debug
+.idea
+.editorconfig
+.vscode
+/server/cmake-build-debug
+/client/cmake-build-debug
+client/client.exe
+server/server.exe
+
